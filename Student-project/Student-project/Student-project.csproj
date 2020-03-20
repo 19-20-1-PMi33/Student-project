@@ -5,6 +5,15 @@
     <RootNamespace>Student_project</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Student-project.Model\Student-project.Model.csproj" />
+    <ProjectReference Include="..\Student-project.Repository\Student-project.Repository.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

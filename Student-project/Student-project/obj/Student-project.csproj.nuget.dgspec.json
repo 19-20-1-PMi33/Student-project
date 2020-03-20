@@ -4,6 +4,37 @@
     "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project\\Student-project.csproj": {}
   },
   "projects": {
+    "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Model\\Student-project.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Model\\Student-project.Model.csproj",
+        "projectName": "Student-project.Model",
+        "projectPath": "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Model\\Student-project.Model.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
+    "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Repository\\Student-project.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Repository\\Student-project.Repository.csproj",
+        "projectName": "Student-project.Repository",
+        "projectPath": "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Repository\\Student-project.Repository.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Model\\Student-project.Model.csproj": {
+                "projectPath": "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Model\\Student-project.Model.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
     "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project\\Student-project.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -31,7 +62,14 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Model\\Student-project.Model.csproj": {
+                "projectPath": "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Model\\Student-project.Model.csproj"
+              },
+              "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Repository\\Student-project.Repository.csproj": {
+                "projectPath": "C:\\Users\\User\\source\\repos\\Student-project\\Student-project\\Student-project.Repository\\Student-project.Repository.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -42,6 +80,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
