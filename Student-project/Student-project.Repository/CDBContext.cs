@@ -12,6 +12,7 @@ namespace Student_project.Repository
     {
         public CDBContext() : base("ConnectionString")
         {
+            Database.SetInitializer<CDBContext>(new SampleInitializer());
         }
         public DbSet<Students> Students { get; set; }
         public DbSet<Departments> Departments { get; set; }
