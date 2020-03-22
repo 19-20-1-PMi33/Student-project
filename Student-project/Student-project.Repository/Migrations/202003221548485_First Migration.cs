@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ModelsMigration : DbMigration
+    public partial class FirstMigration : DbMigration
     {
         public override void Up()
         {
@@ -48,6 +48,18 @@
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
+                "dbo.Students",
+                c => new
+                    {
+                        ID = c.String(nullable: false, maxLength: 128),
+                        LastName = c.String(),
+                        FirstName = c.String(),
+                        MiddleName = c.String(),
+                        Group = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.Subjects",
                 c => new
                     {
@@ -66,6 +78,7 @@
                         FirstName = c.String(),
                         MiddleName = c.String(),
                         Department = c.String(),
+                        Type = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -75,6 +88,7 @@
         {
             DropTable("dbo.Teachers");
             DropTable("dbo.Subjects");
+            DropTable("dbo.Students");
             DropTable("dbo.Marks");
             DropTable("dbo.Groups");
             DropTable("dbo.Exams");
