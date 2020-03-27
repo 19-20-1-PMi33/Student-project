@@ -13,3 +13,4 @@ C:\Users\User\source\repos\Student-project\Student-project\Student-project.Repos
 C:\Users\User\source\repos\Student-project\Student-project\Student-project.Repository\obj\Debug\Student-project.Repository.pdb
 C:\Users\User\source\repos\Student-project\Student-project\Student-project.Repository\obj\Debug\Student_project.Repository.Migrations.FirstMigration.resources
 C:\Users\User\source\repos\Student-project\Student-project\Student-project.Repository\obj\Debug\Student-project.Repository.csproj.GenerateResource.cache
+C:\Users\User\source\repos\Student-project\Student-project\Student-project.Repository\obj\Debug\Student_project.Repository.Migrations.ModelsMigration.resources

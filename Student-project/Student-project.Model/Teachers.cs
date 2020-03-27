@@ -15,6 +15,5 @@ namespace Student_project.Model
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string Department { get; set; }
-        public string Type { get; set; }
     }
 }
