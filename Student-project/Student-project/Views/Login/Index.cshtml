@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    ViewBag.Title = "Логін";
 }
 
 <!DOCTYPE html>
@@ -14,11 +15,11 @@
 <body>
     <div class="login-page">
         <div class="form">
-            <form class="login-form">
-                <p class="text">Авторизація<p>
-                    <input type="text" placeholder="Логін" />
-                    <input type="password" placeholder="Пароль" />
-                    <button>Увійти</button>
+            <p class="text">Авторизація</p>
+            <form class="login-form" method="post" asp-action="Login">
+                <input type="text" name="UserName" placeholder="Логін" />
+                <input type="password" name="Password" placeholder="Пароль" />
+                <button type="submit">Увійти</button>
             </form>
         </div>
     </div>
