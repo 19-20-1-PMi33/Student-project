@@ -44,6 +44,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,13 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDBContext.cs" />
-    <Compile Include="Migrations\202003202125194_First Migration.cs" />
-    <Compile Include="Migrations\202003202125194_First Migration.designer.cs">
-      <DependentUpon>202003202125194_First Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003202213575_Models Migration.cs" />
-    <Compile Include="Migrations\202003202213575_Models Migration.designer.cs">
-      <DependentUpon>202003202213575_Models Migration.cs</DependentUpon>
+    <Compile Include="Migrations\202003221548485_First Migration.cs" />
+    <Compile Include="Migrations\202003221548485_First Migration.designer.cs">
+      <DependentUpon>202003221548485_First Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,11 +72,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003202125194_First Migration.resx">
-      <DependentUpon>202003202125194_First Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003202213575_Models Migration.resx">
-      <DependentUpon>202003202213575_Models Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003221548485_First Migration.resx">
+      <DependentUpon>202003221548485_First Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
