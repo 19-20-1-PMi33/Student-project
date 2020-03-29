@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Student_project.Models;
+using Student_project.Repository;
 
 namespace Student_project.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        CDBContext db = new CDBContext();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -20,6 +23,7 @@ namespace Student_project.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.UserSecondName = db.Students.FindAsync(HttpContext.Request.Cookies["UserID"]).Result.LastName;
             return View();
         }
 

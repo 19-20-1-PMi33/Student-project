@@ -19,8 +19,9 @@ namespace Student_project.Controllers
         [ActionName("Login")]
         public ActionResult LoginIntoSite(string UserName, string Password)
         {
-            if(db.Students.Find(UserName) != null && Password == UserName)
+            if(db.Students.FindAsync(UserName) != null && Password == UserName)
             {
+                HttpContext.Response.Cookies.Append("userID", UserName);
                 return Redirect("/Home/Index");
             }
             else

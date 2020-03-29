@@ -1,67 +1,80 @@
-﻿@import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
-.login-page {
-    width: 360px;
-    padding: 8% 0 0;
-    margin: auto;
+﻿body {
+    background-color: #191919;
+    margin: 0;
+    background-size: cover;
 }
 
-.form {
-    position: relative;
-    z-index: 1;
-    background: #FFFFFF;
-    max-width: 360px;
-    margin: 0 auto 100px;
-    padding: 45px;
+.Menu {
+    width: 100%;
+    height: 80px;
+    margin: 0;
+    background: #3e383e;
+}
+
+.Title_1 {
+    color: #c3d2d7;
+    padding-top: 25px;
+    margin: 0 auto;
+    width: 200px;
     text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    font-size:22px;
 }
 
-.form input {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
+.gerb {
+    width: 70px;
+    height: 80px;
+    margin: auto;
+    float: left;
+}
+
+.Window {
+    border-radius: 20px;
+    width: 400px;
+    height: 500px;
+    background: #c3d2d7;
+    margin: 50px auto;
+}
+
+.text {
+    padding-top: 30px;
+    padding-left: 90px;
+}
+
+.Surname {
+    color: #191919;
+    padding-left: 55px;
+    padding-top:20px;
+}
+
+.input_sur {
+    margin: 0;
+    border-radius: 5px;
+}
+
+.Password {
+    color: #191919;
+    padding-left: 55px;
+}
+
+.input_pas {
+    margin: 0;
+    border-radius: 5px;
+}
+
+.Log_in {
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    color: #c3d2d7;
+    background-color: #191919;
+    margin: 40px 150px 20px 150px;
     border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
 }
 
-.form button {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #FB991D;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
-    cursor: pointer;
-}
-
-.form button:hover, .form button:active, .form button:focus {
-    background: #FF7400;
-}
-
-.form .text {
-    font-size: 30px;
-    font-weight: 1000;
-    color: #FF7400;
-    text-decoration: none;
-}
-
-body {
-    background: #FB991D; /* fallback for old browsers */
-    background: -webkit-linear-gradient(right, #FB991D, #FF7400);
-    background: -moz-linear-gradient(right, #FB991D, #FF7400);
-    background: -o-linear-gradient(right, #FB991D, #FF7400);
-    background: linear-gradient(to left, #FB991D, #FF7400);
-    font-family: "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+.text_1 {
+    border: 10px;
+    color: #191919;
+    padding-left: 45px;
+    text-align: center;
+    width: 310px;
 }

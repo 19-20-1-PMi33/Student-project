@@ -1,7 +1,6 @@
 ﻿
 @{
     Layout = null;
-    ViewBag.Title = "Логін";
 }
 
 <!DOCTYPE html>
@@ -12,16 +11,33 @@
     <title>Авторизація</title>
     <link rel="stylesheet" type="text/css" href="~/css/site.css">
 </head>
-<body>
-    <div class="login-page">
-        <div class="form">
-            <p class="text">Авторизація</p>
-            <form class="login-form" method="post" asp-action="Login">
-                <input type="text" name="UserName" placeholder="Логін" />
-                <input type="password" name="Password" placeholder="Пароль" />
-                <button type="submit">Увійти</button>
-            </form>
+    <body>
+        <div class="Menu">
+            <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
+
+            <div class="Title_1">Кабінет Студента</div>
         </div>
-    </div>
-</body>
+
+        <div class="Window">
+            <div class="text">
+                <h3>Авторизація Користувача</h3>
+            </div>
+            <form  method="post" asp-action="Login">
+                <div class="Surname">
+                    <h4>Номер залікової книги:</h4>
+                    <input class="input_sur" type="text" name="UserName" size="40">
+                </div>
+                <div class="Password">
+                    <h4>Пароль:</h4>
+                    <input class="input_pas" type="password" name="Password" size="40">
+                </div>
+
+                <button class="Log_in" type="submit">Вхід</button>
+            </form>
+            <div class="text_1">
+                <h4>При першому вході в персональний кабінет студента потрібно використовувати замість пароля<br> № залікової книжки.</h4>
+            </div>
+
+        </div>
+    </body>
 </html>
