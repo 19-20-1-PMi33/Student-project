@@ -1,5 +1,0 @@
-C:\Users\User\source\repos\Student-project\Student-project\Student-project.Model\bin\Debug\Student-project.Model.dll
-C:\Users\User\source\repos\Student-project\Student-project\Student-project.Model\bin\Debug\Student-project.Model.pdb
-C:\Users\User\source\repos\Student-project\Student-project\Student-project.Model\obj\Debug\Student-project.Model.csprojAssemblyReference.cache
-C:\Users\User\source\repos\Student-project\Student-project\Student-project.Model\obj\Debug\Student-project.Model.dll
-C:\Users\User\source\repos\Student-project\Student-project\Student-project.Model\obj\Debug\Student-project.Model.pdb

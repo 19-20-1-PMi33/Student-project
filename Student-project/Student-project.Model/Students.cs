@@ -15,6 +15,11 @@ namespace Student_project.Model
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
+
+        [ForeignKey("Groups")]
         public string Group { get; set; }
+        public string Specialty { get; set; }
+
+        public virtual Groups Groups { get; set; }
     }
 }
