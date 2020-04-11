@@ -1,7 +1,9 @@
-﻿
+﻿@model Student_project.Model.Students;
+
 @{
     Layout = null;
 }
+
 
 <!DOCTYPE html>
 
@@ -22,22 +24,40 @@
             <div class="text">
                 <h3>Авторизація Користувача</h3>
             </div>
-            <form  method="post" asp-action="Login">
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
                 <div class="Surname">
-                    <h4>Номер залікової книги:</h4>
-                    <input class="input_sur" type="text" name="UserName" size="40">
+                    @*<h4>Номер залікової книги:</h4>*@
+
+                    @Html.LabelFor(model => model.ID)
+                    <p>@Html.EditorFor(model => model.ID)</p>
                 </div>
                 <div class="Password">
-                    <h4>Пароль:</h4>
-                    <input class="input_pas" type="password" name="Password" size="40">
+                    @*<h4>Пароль:</h4>*@
+                    @Html.LabelFor(model => model.Password)
+                        <p>@Html.EditorFor(model => model.Password)</p>
+                        <p>@Html.ValidationMessageFor(model => model.Password)</p>
+                        @*@Html.Password("Password", "", new { @class = "input_pas", size = "40px" })*@
                 </div>
-
                 <button class="Log_in" type="submit">Вхід</button>
-            </form>
+            }
+            @*<form  method="post" asp-action="Login">
+            <div class="Surname">
+                <h4>Номер залікової книги:</h4>
+                <input class="input_sur" type="text" name="UserName" size="40">
+            </div>
+            <div class="Password">
+                <h4>Пароль:</h4>
+                <input class="input_pas" type="password" name="Password" size="40">
+            </div>
+
+            <button class="Log_in" type="submit">Вхід</button>
+        </form>*@
             <div class="text_1">
                 <h4>При першому вході в персональний кабінет студента потрібно використовувати замість пароля<br> № залікової книжки.</h4>
             </div>
 
         </div>
-    </body>
+</body>
 </html>

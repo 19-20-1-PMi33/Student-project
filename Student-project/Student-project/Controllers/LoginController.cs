@@ -17,17 +17,25 @@ namespace Student_project.Controllers
         }
         [HttpPost]
         [ActionName("Login")]
-        public ActionResult LoginIntoSite(string UserName, string Password)
+        public IActionResult LoginIntoSite(Student_project.Model.Students student)
         {
-            if(db.Students.FindAsync(UserName) != null && Password == UserName)
+            var _student = db.Students.Find(student.ID);
+            if (_student == null || _student.Password != student.Password)
             {
-                HttpContext.Response.Cookies.Append("userID", UserName);
-                return Redirect("/Home/Index");
+                ModelState.AddModelError("Password", "Невірний номер заліковки чи пароль");
+                //HttpContext.Response.Cookies.Append("userID", UserName);
+                //return Redirect("/Home/Index");
             }
-            else
+            if (ModelState.IsValid)
             {
-                return Content($"Невірний логін чи пароль");
+                HttpContext.Response.Cookies.Append("userID", student.ID);
+                return RedirectToAction("Index", "Home");
             }
+            //else
+            //{
+            //    return Content($"Невірний логін чи пароль");
+            //}
+            return View("Index");
         }
     }
 }

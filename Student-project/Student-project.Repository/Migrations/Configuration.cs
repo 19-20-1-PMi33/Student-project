@@ -75,7 +75,8 @@
                     FirstName = "Вадим",
                     MiddleName = "Глібович",
                     Group = "ПМІ-33",
-                    Specialty = "Комп'ютерні науки"
+                    Specialty = "Комп'ютерні науки",
+                    Password = "123456c"
                 },
                 new Students
                 {
@@ -84,7 +85,8 @@
                     FirstName = "Тарас",
                     MiddleName = "Степанович",
                     Group = "ПМІ-33",
-                    Specialty = "Комп'ютерні науки"
+                    Specialty = "Комп'ютерні науки",
+                    Password = "123457c"
                 },
                 new Students
                 {
@@ -93,7 +95,8 @@
                     FirstName = "Влад",
                     MiddleName = "Анатолійович",
                     Group = "ПМІ-33",
-                    Specialty = "Комп'ютерні науки"
+                    Specialty = "Комп'ютерні науки",
+                    Password = "123458c"
                 }
             };
 
