@@ -24,7 +24,7 @@
             <div class="text">
                 <h3>Авторизація Користувача</h3>
             </div>
-            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            @using (Html.BeginForm("LoginIntoSite", "Login", FormMethod.Post))
             {
                 @Html.ValidationSummary(true)
                 <div class="Surname">
@@ -32,12 +32,13 @@
 
                     @Html.LabelFor(model => model.ID)
                     <p>@Html.EditorFor(model => model.ID)</p>
+                    <p>@Html.ValidationMessageFor(model => model.ID)</p>
                 </div>
                 <div class="Password">
                     @*<h4>Пароль:</h4>*@
                     @Html.LabelFor(model => model.Password)
-                        <p>@Html.EditorFor(model => model.Password)</p>
-                        <p>@Html.ValidationMessageFor(model => model.Password)</p>
+                    <p>@Html.EditorFor(model => model.Password)</p>
+                    <p>@Html.ValidationMessageFor(model => model.Password)</p>
                         @*@Html.Password("Password", "", new { @class = "input_pas", size = "40px" })*@
                 </div>
                 <button class="Log_in" type="submit">Вхід</button>

@@ -23,10 +23,20 @@ namespace Student_project.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.UserSecondName = db.Students.FindAsync(HttpContext.Request.Cookies["UserID"]).Result.LastName;
+            var student = db.Students.FindAsync(HttpContext.Request.Cookies["UserID"]).Result;
+            var group = db.Groups.FindAsync(student.Group).Result;
+            ViewBag.StudentName = $"{student.LastName} {student.FirstName} {student.MiddleName}";
+            ViewBag.StudentGroup = group.GroupName;
+            ViewBag.StudentSpeciality = student.Specialty;
+            ViewBag.GroupDepartment = group.Department;
+            ViewBag.Faculty = db.Departments.FindAsync(group.Department).Result.Faculty;
             return View();
         }
-
+        public IActionResult Exit()
+        {
+            HttpContext.Response.Cookies.Delete("UserId");
+            return RedirectToAction("Index", "Login");
+        }   
         public IActionResult Privacy()
         {
             return View();

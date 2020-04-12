@@ -25,7 +25,7 @@ namespace Student_project.Model
         [Display(Name = "Ім'я по батькові")]
         public string MiddleName { get; set; }
 
-        [Required]
+        [Required()]
         [Display(Name = "Пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

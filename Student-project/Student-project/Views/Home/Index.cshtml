@@ -1,9 +1,44 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>@ViewBag.UserSecondName</p>
-</div>
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Загальна Інформація</title>
+        <link rel="stylesheet" type="text/css" href="~/css/menu.css">
+    </head>
+    <body>
+        <div class="Menu">
+            <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
+            <button class="full_name" onclick="location.href='@Url.Action("Index", "Home")'">@ViewBag.StudentName</button>
+            <button class="Exit" onclick="location.href='@Url.Action("Index", "Home")'">Вихід</button>
+            <nav class="one">
+                <ul class="topmenu">
+                    <li>
+                        <button class="button_1" onclick="location.href='@Url.Action("Index", "Home")'">Загальна інформація</button>
+                        <ul class="submenu">
+                            <li><button class="button_1_0">Семестрові бали</button></li>
+                            <li><button class="button_1_1">Статистика оцінок</button></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="Title_1">Кабінет Студента</div>
+
+        </div>
+        <div class="private_inform">
+            <br>
+            <h2 class="title_inf">Загальна інформація</h2>
+            <p>Львівський національний університет імені Івана Франка</p>
+            <p>Факультет <strong>@ViewBag.Faculty</strong></p>
+            <p>Кафедра <strong>@ViewBag.GroupDepartment</strong></p>
+            <p>Спеціальність <strong>@ViewBag.StudentSpeciality</strong></p>
+            <p>Группа <strong>@ViewBag.StudentGroup</strong></p>
+            <br>
+        </div>
+    </body>
+</html>
