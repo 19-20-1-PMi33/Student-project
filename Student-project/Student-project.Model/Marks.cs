@@ -17,6 +17,7 @@ namespace Student_project.Model
         [ForeignKey("Students")]
         public string StudentId { get; set; }
         public DateTime Date { get; set; }
+        public int Mark { get; set; }
         public virtual Exams Exams { get; set; }
         public virtual Students Students { get; set; }
 

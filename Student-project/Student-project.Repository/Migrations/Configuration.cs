@@ -105,6 +105,95 @@
                 context.Students.AddOrUpdate(student);
             }
 
+            List<Teachers> teachers = new List<Teachers>
+            {
+                new Teachers
+                {
+                    LastName = "Притула",
+                    FirstName = "Микола",
+                    MiddleName = "Миколайович",
+                    Department = "Дискретного аналізу та інтелектуальних систем",
+                    Type = "Професор"
+                },
+                new Teachers
+                {
+                    LastName = "Рикалюк",
+                    FirstName = "Роман",
+                    MiddleName = "Євстахович",
+                    Department = "Програмування",
+                    Type = "Доцент"
+                }
+            };
+
+            foreach (Teachers teacher in teachers)
+            {
+                context.Teachers.AddOrUpdate(teacher);
+            }
+
+            List<Subjects> subjects = new List<Subjects>
+            {
+                new Subjects
+                {
+                    Title = "ТІМС",
+                    Hours = 120,
+                    Credits = 80
+                },
+                new Subjects
+                {
+                    Title = "Комп'ютерні інформаційні мережі",
+                    Hours = 120,
+                    Credits = 80
+                }
+            };
+
+            foreach (Subjects subject in subjects)
+            {
+                context.Subjects.AddOrUpdate(subject);
+            }
+
+            List<Exams> exams = new List<Exams>
+            {
+                new Exams
+                {
+                    Subject = "ТІМС",
+                    Teacher = 1,
+                    GroupName = "ПМІ-33"
+                },
+                new Exams
+                {
+                    Subject = "Комп'ютерні інформаційні мережі",
+                    Teacher = 2,
+                    GroupName = "ПМІ-33"
+                }
+            };
+
+            foreach (Exams exam in exams)
+            {
+                context.Exams.AddOrUpdate(exam);
+            }
+
+            List<Marks> marks = new List<Marks>
+            {
+                new Marks
+                {
+                    Exam = 1,
+                    StudentId = "123456c",
+                    Date = new DateTime(2019,12,26).Date,
+                    Mark = 68
+                },
+                new Marks
+                {
+                    Exam = 2,
+                    StudentId = "123456c",
+                    Date = new DateTime(2019,12,29).Date,
+                    Mark = 90
+                }
+            };
+            foreach (Marks mark in marks)
+            {
+                context.Marks.AddOrUpdate(mark);
+               
+            }
             context.SaveChanges();
             base.Seed(context);
         }

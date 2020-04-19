@@ -32,6 +32,10 @@ namespace Student_project.Controllers
             ViewBag.Faculty = db.Departments.FindAsync(group.Department).Result.Faculty;
             return View();
         }
+        public IActionResult Marks()
+        {
+            return View();
+        }
         public IActionResult Exit()
         {
             HttpContext.Response.Cookies.Delete("UserId");
