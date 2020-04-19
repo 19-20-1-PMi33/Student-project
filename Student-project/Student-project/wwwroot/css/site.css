@@ -30,9 +30,9 @@
 .Window {
     border-radius: 20px;
     width: 400px;
-    height: 600px;
+    height: 500px;
     background: #c3d2d7;
-    margin: 50px;
+    margin: 50px auto;
 }
 
 .text {

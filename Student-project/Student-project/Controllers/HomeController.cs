@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -34,7 +35,11 @@ namespace Student_project.Controllers
         }
         public IActionResult Marks()
         {
-            return View();
+            var student = db.Students.FindAsync(HttpContext.Request.Cookies["UserID"]).Result;
+            var group = db.Groups.FindAsync(student.Group).Result;
+            ViewBag.StudentName = $"{student.LastName} {student.FirstName} {student.MiddleName}";
+            var marks = db.Marks.Include(c=>c.Exams).Where(x=>x.StudentId == student.ID).ToList();
+            return View(marks);
         }
         public IActionResult Exit()
         {

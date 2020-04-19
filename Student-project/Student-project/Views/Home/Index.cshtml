@@ -14,18 +14,19 @@
         <div class="Menu">
             <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
             <button class="full_name" onclick="location.href='@Url.Action("Index", "Home")'">@ViewBag.StudentName</button>
-            <button class="Exit" onclick="location.href='@Url.Action("Index", "Home")'">Вихід</button>
-            <nav class="one">
-                <ul class="topmenu">
-                    <li>
-                        <button class="button_1" onclick="location.href='@Url.Action("Index", "Home")'">Загальна інформація</button>
-                        <ul class="submenu">
-                            <li><button class="button_1_0">Семестрові бали</button></li>
-                            <li><button class="button_1_1">Статистика оцінок</button></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+            <button class="Exit" onclick="location.href='@Url.Action("Exit", "Home")'">Вихід</button>
+            <button class="Exit" onclick="location.href='@Url.Action("Marks", "Home")'">Семістрові бали</button>
+            @*<nav class="one">
+            <ul class="topmenu">
+                <li>
+                    <button class="button_1" onclick="location.href='@Url.Action("Index", "Home")'">Загальна інформація</button>
+                    <ul class="submenu">
+                        <li><button class="button_1_0">Семестрові бали</button></li>
+                        <li><button class="button_1_1">Статистика оцінок</button></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>*@
 
             <div class="Title_1">Кабінет Студента</div>
 
