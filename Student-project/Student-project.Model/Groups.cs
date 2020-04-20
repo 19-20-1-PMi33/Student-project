@@ -15,6 +15,6 @@ namespace Student_project.Model
 
         [ForeignKey("Departments")]
         public string Department { get; set; }
-        public virtual Departments Departments { get; set; }
+        public Departments Departments { get; set; }
     }
 }

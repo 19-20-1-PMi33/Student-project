@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Student_project.Models;
 using Student_project.Repository;
 
+
 namespace Student_project.Controllers
 {
     public class HomeController : Controller
@@ -24,21 +25,23 @@ namespace Student_project.Controllers
 
         public IActionResult Index()
         {
-            var student = db.Students.FindAsync(HttpContext.Request.Cookies["UserID"]).Result;
-            var group = db.Groups.FindAsync(student.Group).Result;
-            ViewBag.StudentName = $"{student.LastName} {student.FirstName} {student.MiddleName}";
-            ViewBag.StudentGroup = group.GroupName;
-            ViewBag.StudentSpeciality = student.Specialty;
-            ViewBag.GroupDepartment = group.Department;
-            ViewBag.Faculty = db.Departments.FindAsync(group.Department).Result.Faculty;
-            return View();
+            string user = HttpContext.Request.Cookies["UserID"];
+            var student = db.Students.Where(x => x.ID == user)
+                .Include(x => x.Groups)
+                .Include(x=>x.Groups.Departments)
+                .First();
+
+            return View(student);
         }
         public IActionResult Marks()
         {
             var student = db.Students.FindAsync(HttpContext.Request.Cookies["UserID"]).Result;
-            var group = db.Groups.FindAsync(student.Group).Result;
             ViewBag.StudentName = $"{student.LastName} {student.FirstName} {student.MiddleName}";
-            var marks = db.Marks.Include(c=>c.Exams).Where(x=>x.StudentId == student.ID).ToList();
+            var marks = db.Marks.Where(x=>x.StudentId == student.ID)
+                .Include(x=>x.Exams.Subjects)
+                .Include(x=>x.Exams.Teachers)
+                .ToList();
+
             return View(marks);
         }
         public IActionResult Exit()

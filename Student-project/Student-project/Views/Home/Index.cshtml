@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Student_project.Model.Students
+@{
     Layout = null;
 }
 
@@ -13,7 +14,7 @@
     <body>
         <div class="Menu">
             <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
-            <button class="full_name" onclick="location.href='@Url.Action("Index", "Home")'">@ViewBag.StudentName</button>
+            <button class="full_name" onclick="location.href='@Url.Action("Index", "Home")'">@Model.LastName @Model.FirstName @Model.MiddleName</button>
             <button class="Exit" onclick="location.href='@Url.Action("Exit", "Home")'">Вихід</button>
             <button class="Exit" onclick="location.href='@Url.Action("Marks", "Home")'">Семістрові бали</button>
             @*<nav class="one">
@@ -35,10 +36,10 @@
             <br>
             <h2 class="title_inf">Загальна інформація</h2>
             <p>Львівський національний університет імені Івана Франка</p>
-            <p>Факультет <strong>@ViewBag.Faculty</strong></p>
-            <p>Кафедра <strong>@ViewBag.GroupDepartment</strong></p>
-            <p>Спеціальність <strong>@ViewBag.StudentSpeciality</strong></p>
-            <p>Группа <strong>@ViewBag.StudentGroup</strong></p>
+            <p>Факультет <strong>@Model.Groups.Departments.Faculty</strong></p>
+            <p>Кафедра <strong>@Model.Groups.Department</strong></p>
+            <p>Спеціальність <strong>@Model.Specialty</strong></p>
+            <p>Группа <strong>@Model.Group</strong></p>
             <br>
         </div>
     </body>

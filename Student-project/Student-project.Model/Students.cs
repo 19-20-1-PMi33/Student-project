@@ -37,6 +37,6 @@ namespace Student_project.Model
         [Display(Name = "Спеціальність")]
         public string Specialty { get; set; }
 
-        public virtual Groups Groups { get; set; }
+        public Groups Groups { get; set; }
     }
 }
