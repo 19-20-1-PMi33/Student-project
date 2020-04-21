@@ -1,0 +1,57 @@
+﻿@using System.Linq;
+@model List<Student_project.Model.Marks>;
+
+@{
+    Layout = null;
+}
+
+@{ 
+    int count = Model.Count();
+    double avgMark100 = Model.Sum(x => x.Mark) / count;
+    double countAMark = (Model.Count(x => x.Mark >= 90) * 100) / count;
+    double countBCMark = (Model.Count(x => x.Mark >= 71 && x.Mark < 90) * 100) / count;
+    double countDEMark = (Model.Count(x => x.Mark >= 51 && x.Mark < 71) * 100) / count;
+    double countBMark = (Model.Count(x => x.Mark >= 81 && x.Mark < 90) * 100) / count;
+    double countCMark = (Model.Count(x => x.Mark >= 71 && x.Mark < 81) * 100) / count;
+    double countDMark = (Model.Count(x => x.Mark >= 61 && x.Mark < 71) * 100) / count;
+    double countEMark = (Model.Count(x => x.Mark >= 51 && x.Mark < 61) * 100) / count;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Статистика оцінок</title>
+    <link rel="stylesheet" type="text/css" href="~/css/menu.css">
+</head>
+<body>
+    <div class="Menu">
+        <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
+        <button class="full_name" onclick="location.href='@Url.Action("Index", "Home")'">@Model.First().Students.LastName @Model.First().Students.FirstName @Model.First().Students.MiddleName</button>
+        <button class="Exit" onclick="location.href='@Url.Action("Exit", "Home")'">Вихід</button>
+        <button class="Exit" onclick="location.href='@Url.Action("Marks", "Home")'">Семістрові бали</button>
+        <button class="Exit" onclick="location.href='@Url.Action("Statistics", "Home")'">Статистика оцінок</button>
+        <div class="Title_1">Кабінет Студента</div>
+
+    </div>
+    <div class="middle_inform">
+        <br>
+        <h2>Статистика оцінок</h2>
+        <p>Середній бал студента за весь період - <strong>@avgMark100</strong>, середній бал группи студента - <strong>@ViewBag.GroupMark</strong></p>
+        <p>
+            Розподіл оцінок студента за: <br />національною шкалою:
+            відмінно - <strong>@countAMark%</strong>,
+            добре - <strong>@countBCMark%</strong>,
+            задовільно - <strong>@countDEMark%</strong>;
+            <br />шкалою ECTS:
+            А - <strong>@countAMark%</strong>,
+            В - <strong>@countBMark%</strong>,
+            С - <strong>@countCMark%</strong>,
+            D - <strong>@countDMark%</strong>,
+            Е - <strong>@countEMark%</strong>.
+        </p>
+        <br>
+    </div>
+</body>
+</html>

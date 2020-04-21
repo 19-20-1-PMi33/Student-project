@@ -35,15 +35,29 @@ namespace Student_project.Controllers
         }
         public IActionResult Marks()
         {
-            var student = db.Students.FindAsync(HttpContext.Request.Cookies["UserID"]).Result;
-            ViewBag.StudentName = $"{student.LastName} {student.FirstName} {student.MiddleName}";
-            var marks = db.Marks.Where(x=>x.StudentId == student.ID)
+            string user = HttpContext.Request.Cookies["UserID"];
+            var marks = db.Marks.Where(x=>x.StudentId == user)
                 .Include(x=>x.Exams.Subjects)
                 .Include(x=>x.Exams.Teachers)
+                .Include(x=>x.Students)
                 .ToList();
 
             return View(marks);
         }
+
+        public IActionResult Statistics()
+        {
+            string user = HttpContext.Request.Cookies["UserID"];
+            var student = db.Students.Find(user);
+            double groupMark = db.Marks.Where(x => x.Students.Group == student.Group).Sum(x => x.Mark) / db.Marks.Count(x => x.Students.Group == student.Group);
+            ViewBag.GroupMark = groupMark;
+            var studentsMark = db.Marks.Where(x => x.StudentId == user)
+                .Include(x => x.Students)
+                .ToList();
+
+            return View(studentsMark);
+        }
+
         public IActionResult Exit()
         {
             HttpContext.Response.Cookies.Delete("UserId");
