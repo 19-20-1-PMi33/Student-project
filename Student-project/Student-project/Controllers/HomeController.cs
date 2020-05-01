@@ -36,6 +36,9 @@ namespace Student_project.Controllers
         public IActionResult Marks()
         {
             string user = HttpContext.Request.Cookies["UserID"];
+            var student = db.Students.Find(user);
+            double groupMark = db.Marks.Where(x => x.Students.Group == student.Group).Sum(x => x.Mark) / db.Marks.Count(x => x.Students.Group == student.Group);
+            ViewBag.GroupMark = groupMark;
             var marks = db.Marks.Where(x=>x.StudentId == user)
                 .Include(x=>x.Exams.Subjects)
                 .Include(x=>x.Exams.Teachers)
@@ -43,19 +46,6 @@ namespace Student_project.Controllers
                 .ToList();
 
             return View(marks);
-        }
-
-        public IActionResult Statistics()
-        {
-            string user = HttpContext.Request.Cookies["UserID"];
-            var student = db.Students.Find(user);
-            double groupMark = db.Marks.Where(x => x.Students.Group == student.Group).Sum(x => x.Mark) / db.Marks.Count(x => x.Students.Group == student.Group);
-            ViewBag.GroupMark = groupMark;
-            var studentsMark = db.Marks.Where(x => x.StudentId == user)
-                .Include(x => x.Students)
-                .ToList();
-
-            return View(studentsMark);
         }
 
         public IActionResult Exit()

@@ -2,6 +2,17 @@
 @{
     Layout = null;
 }
+@{
+    int count = Model.Count();
+    double avgMark100 = Model.Sum(x => x.Mark) / count;
+    double countAMark = (Model.Count(x => x.Mark >= 90) * 100) / count;
+    double countBCMark = (Model.Count(x => x.Mark >= 71 && x.Mark < 90) * 100) / count;
+    double countDEMark = (Model.Count(x => x.Mark >= 51 && x.Mark < 71) * 100) / count;
+    double countBMark = (Model.Count(x => x.Mark >= 81 && x.Mark < 90) * 100) / count;
+    double countCMark = (Model.Count(x => x.Mark >= 71 && x.Mark < 81) * 100) / count;
+    double countDMark = (Model.Count(x => x.Mark >= 61 && x.Mark < 71) * 100) / count;
+    double countEMark = (Model.Count(x => x.Mark >= 51 && x.Mark < 61) * 100) / count;
+}
 
 <!DOCTYPE html>
 
@@ -17,43 +28,27 @@
         <button class="full_name" onclick="location.href='@Url.Action("Index", "Home")'">@Model.First().Students.LastName @Model.First().Students.FirstName @Model.First().Students.MiddleName</button>
         <button class="Exit" onclick="location.href='@Url.Action("Exit", "Home")'">Вихід</button>
         <button class="Exit" onclick="location.href='@Url.Action("Marks", "Home")'">Семістрові бали</button>
-        <button class="Exit" onclick="location.href='@Url.Action("Statistics", "Home")'">Статистика оцінок</button>
-        @*<nav class="one">
-
-            <ul class="topmenu">
-
-                <li>
-                    <button class="button_1" href="#">Навчання студента</button>
-                    <ul class="submenu">
-                        <li><button class="button_1_0">Семестрові бали</button></li>
-                        <li><button class="button_1_1">Item 2</button></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </nav>*@
-
         <div class="Title_1">Кабінет Студента</div>
 
     </div>
-    @*<div class="middle_inform">
+    <div class="middle_inform">
         <br>
         <h2>Статистика оцінок</h2>
-        <p>Середній бал студента за весь період - <strong>57,33 / 3,23</strong></p>
+        <p>Середній бал студента за весь період - <strong>@avgMark100</strong>, середній бал группи студента - <strong>@ViewBag.GroupMark</strong></p>
         <p>
-            Розподіл оцінок за: <br />національною шкалою:
-            відмінно <strong>0</strong>%,
-            добре <strong>19</strong>%,
-            задовільно <strong>81</strong>%;
+            Розподіл оцінок студента за: <br />національною шкалою:
+            відмінно - <strong>@countAMark%</strong>,
+            добре - <strong>@countBCMark%</strong>,
+            задовільно - <strong>@countDEMark%</strong>;
             <br />шкалою ECTS:
-            А <strong>0</strong>%,
-            В <strong>0</strong>%,
-            С <strong>19</strong>%,
-            D <strong>9,5</strong>%,
-            Е <strong>71,4</strong>%.
+            А - <strong>@countAMark%</strong>,
+            В - <strong>@countBMark%</strong>,
+            С - <strong>@countCMark%</strong>,
+            D - <strong>@countDMark%</strong>,
+            Е - <strong>@countEMark%</strong>.
         </p>
         <br>
-    </div>*@
+    </div>
 
     <div class="marks_inform">
         <br>
@@ -65,7 +60,7 @@
                 <th>Викладач</th>
                 <th>Бал</th>
             </tr>
-            @foreach(var item in Model)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>@item.Exams.Subject</td>
