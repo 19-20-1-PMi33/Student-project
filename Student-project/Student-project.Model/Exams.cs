@@ -10,7 +10,7 @@ namespace Student_project.Model
 {
     public class Exams
     {
-        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity), Key()]
         public int Key { get; set; }
         [ForeignKey("Subjects")]
         public string Subject { get; set; }
@@ -19,9 +19,9 @@ namespace Student_project.Model
         [ForeignKey("Groups")]
         public string GroupName { get; set; }
 
-        public Subjects Subjects { get; set; }
-        public Teachers Teachers { get; set; }
-        public Groups Groups { get; set; }
+        public virtual Subjects Subjects { get; set; }
+        public virtual Teachers Teachers { get; set; }
+        public virtual Groups Groups { get; set; }
 
     }
 }

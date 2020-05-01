@@ -10,7 +10,7 @@ namespace Student_project.Model
 {
     public class Teachers
     {
-        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity), Key()]
         public int ID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -19,6 +19,6 @@ namespace Student_project.Model
         public string Department { get; set; }
         public string Type { get; set; }
 
-        public Departments Departments { get; set; }
+        public virtual Departments Departments { get; set; }
     }
 }

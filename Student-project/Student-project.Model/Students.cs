@@ -25,18 +25,17 @@ namespace Student_project.Model
         [Display(Name = "Ім'я по батькові")]
         public string MiddleName { get; set; }
 
-        [Required()]
-        [Display(Name = "Пароль")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
         [Display(Name = "Группа")]
         [ForeignKey("Groups")]
         public string Group { get; set; }
 
+        [Display(Name = "Пароль")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
         [Display(Name = "Спеціальність")]
         public string Specialty { get; set; }
 
-        public Groups Groups { get; set; }
+        public virtual Groups Groups { get; set; }
     }
 }

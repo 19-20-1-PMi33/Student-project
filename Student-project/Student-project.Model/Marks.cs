@@ -10,7 +10,7 @@ namespace Student_project.Model
 {
     public class Marks
     {
-        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity), Key()]
         public int ID { get; set; }
         [ForeignKey("Exams")]
         public int Exam { get; set; }
@@ -18,8 +18,8 @@ namespace Student_project.Model
         public string StudentId { get; set; }
         public DateTime Date { get; set; }
         public int Mark { get; set; }
-        public Exams Exams { get; set; }
-        public Students Students { get; set; }
+        public virtual Exams Exams { get; set; }
+        public virtual Students Students { get; set; }
 
     }
 }

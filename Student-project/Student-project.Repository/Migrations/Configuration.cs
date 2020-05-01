@@ -109,6 +109,7 @@
             {
                 new Teachers
                 {
+                    ID = 1,
                     LastName = "Притула",
                     FirstName = "Микола",
                     MiddleName = "Миколайович",
@@ -117,6 +118,7 @@
                 },
                 new Teachers
                 {
+                    ID = 2,
                     LastName = "Рикалюк",
                     FirstName = "Роман",
                     MiddleName = "Євстахович",
@@ -127,7 +129,10 @@
 
             foreach (Teachers teacher in teachers)
             {
-                context.Teachers.AddOrUpdate(teacher);
+                if (context.Teachers.Count(x => x.LastName == teacher.LastName && x.FirstName == teacher.FirstName) < 1)
+                {
+                    context.Teachers.AddOrUpdate(teacher);
+                }
             }
 
             List<Subjects> subjects = new List<Subjects>
@@ -156,43 +161,48 @@
                 new Exams
                 {
                     Subject = "ТІМС",
-                    Teacher = 1,
+                    Teacher = 15,
                     GroupName = "ПМІ-33"
                 },
                 new Exams
                 {
                     Subject = "Комп'ютерні інформаційні мережі",
-                    Teacher = 2,
+                    Teacher = 16,
                     GroupName = "ПМІ-33"
                 }
             };
 
             foreach (Exams exam in exams)
             {
-                context.Exams.AddOrUpdate(exam);
+                if (context.Exams.Count(x => x.Subject == exam.Subject && x.Teacher == exam.Teacher && x.GroupName == exam.GroupName) < 1)
+                {
+                    context.Exams.AddOrUpdate(exam);
+                }
             }
 
             List<Marks> marks = new List<Marks>
             {
                 new Marks
                 {
-                    Exam = 1,
                     StudentId = "123456c",
                     Date = new DateTime(2019,12,26).Date,
+                    Exam = 1,
                     Mark = 68
                 },
                 new Marks
                 {
-                    Exam = 2,
                     StudentId = "123456c",
                     Date = new DateTime(2019,12,29).Date,
+                    Exam = 2,
                     Mark = 90
                 }
             };
             foreach (Marks mark in marks)
             {
-                context.Marks.AddOrUpdate(mark);
-               
+                if (context.Marks.Count(x => x.StudentId == mark.StudentId && x.Exam == mark.Exam) < 1)
+                {
+                    context.Marks.AddOrUpdate(mark);
+                }
             }
             context.SaveChanges();
             base.Seed(context);

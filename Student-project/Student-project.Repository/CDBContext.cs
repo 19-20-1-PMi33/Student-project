@@ -10,7 +10,7 @@ namespace Student_project.Repository
 {
     public class CDBContext: DbContext
     {
-        public CDBContext() : base("UniverDB")
+        public CDBContext() : base("UniverDataBase")
         {
             
         }
