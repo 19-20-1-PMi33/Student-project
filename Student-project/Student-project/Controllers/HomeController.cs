@@ -8,10 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Student_project.Models;
 using Student_project.Repository;
-
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Student_project.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -25,7 +28,7 @@ namespace Student_project.Controllers
 
         public IActionResult Index()
         {
-            string user = HttpContext.Request.Cookies["UserID"];
+            string user = User.Identity.Name;
             var student = db.Students.Where(x => x.ID == user)
                 .Include(x => x.Groups)
                 .Include(x=>x.Groups.Departments)
@@ -35,7 +38,7 @@ namespace Student_project.Controllers
         }
         public IActionResult Marks()
         {
-            string user = HttpContext.Request.Cookies["UserID"];
+            string user = User.Identity.Name;
             var student = db.Students.Find(user);
             double groupMark = db.Marks.Where(x => x.Students.Group == student.Group).Sum(x => x.Mark) / db.Marks.Count(x => x.Students.Group == student.Group);
             ViewBag.GroupMark = groupMark;
@@ -48,11 +51,16 @@ namespace Student_project.Controllers
             return View(marks);
         }
 
-        public IActionResult Exit()
+        //public IActionResult Exit()
+        //{
+        //    HttpContext.Response.Cookies.Delete("UserId");
+        //    return RedirectToAction("Index", "Login");
+        //}
+        public async Task<IActionResult> Exit()
         {
-            HttpContext.Response.Cookies.Delete("UserId");
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Login");
-        }   
+        }
         public IActionResult Privacy()
         {
             return View();
