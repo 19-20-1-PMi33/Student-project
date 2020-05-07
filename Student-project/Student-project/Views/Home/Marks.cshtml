@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Student_project.Model.Marks>
 @{
-    Layout = null;
+    Layout = "~/Views/Home/_Layout.cshtml";
 }
 @{
     int count = Model.Count();
@@ -14,63 +14,55 @@
     double countEMark = (Model.Count(x => x.Mark >= 51 && x.Mark < 61) * 100) / count;
 }
 
-<!DOCTYPE html>
+@{
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
 
-<html>
-<head>
-    <title>Семістрові бали</title>
-    <link rel="stylesheet" type="text/css" href="~/css/menu.css">
-    <meta charset="utf-8">
-</head>
-<body>
-    <div class="Menu">
-        <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
-        <button class="full_name" onclick="location.href='@Url.Action("Index", "Home")'">@Model.First().Students.LastName @Model.First().Students.FirstName @Model.First().Students.MiddleName</button>
-        <button class="Exit" onclick="location.href='@Url.Action("Exit", "Home")'">Вихід</button>
-        <button class="Exit" onclick="location.href='@Url.Action("Marks", "Home")'">Семістрові бали</button>
-        <div class="Title_1">Кабінет Студента</div>
+@section Name {
+    @Model.First().Students.LastName @Model.First().Students.FirstName @Model.First().Students.MiddleName
+}
 
-    </div>
-    <div class="middle_inform">
-        <br>
-        <h2>Статистика оцінок</h2>
-        <p>Середній бал студента за весь період - <strong>@avgMark100</strong>, середній бал группи студента - <strong>@ViewBag.GroupMark</strong></p>
-        <p>
-            Розподіл оцінок студента за: <br />національною шкалою:
-            відмінно - <strong>@countAMark%</strong>,
-            добре - <strong>@countBCMark%</strong>,
-            задовільно - <strong>@countDEMark%</strong>;
-            <br />шкалою ECTS:
-            А - <strong>@countAMark%</strong>,
-            В - <strong>@countBMark%</strong>,
-            С - <strong>@countCMark%</strong>,
-            D - <strong>@countDMark%</strong>,
-            Е - <strong>@countEMark%</strong>.
-        </p>
-        <br>
-    </div>
+@section Title {
+    Оцінки
+}
+<div class="middle_inform">
+    <br>
+    <h2>Статистика оцінок</h2>
+    <p>Середній бал студента за весь період - <strong>@avgMark100</strong>, середній бал группи студента - <strong>@ViewBag.GroupMark</strong></p>
+    <p>
+        Розподіл оцінок студента за: <br />національною шкалою:
+        відмінно - <strong>@countAMark%</strong>,
+        добре - <strong>@countBCMark%</strong>,
+        задовільно - <strong>@countDEMark%</strong>;
+        <br />шкалою ECTS:
+        А - <strong>@countAMark%</strong>,
+        В - <strong>@countBMark%</strong>,
+        С - <strong>@countCMark%</strong>,
+        D - <strong>@countDMark%</strong>,
+        Е - <strong>@countEMark%</strong>.
+    </p>
+    <br>
+</div>
 
-    <div class="marks_inform">
-        <br>
-        <h2>Семестрові бали</h2>
-        <table>
+<div class="marks_inform">
+    <br>
+    <h2>Семестрові бали</h2>
+    <table>
+        <tr>
+            <th>Дисципліна</th>
+            <th>Години</th>
+            <th>Викладач</th>
+            <th>Бал</th>
+        </tr>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Дисципліна</th>
-                <th>Години</th>
-                <th>Викладач</th>
-                <th>Бал</th>
+                <td>@item.Exams.Subject</td>
+                <td>@item.Exams.Subjects.Hours</td>
+                <td>@item.Exams.Teachers.LastName @item.Exams.Teachers.FirstName.Substring(0, 1). @item.Exams.Teachers.MiddleName.Substring(0, 1).</td>
+                <td>@item.Mark</td>
             </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Exams.Subject</td>
-                    <td>@item.Exams.Subjects.Hours</td>
-                    <td>@item.Exams.Teachers.LastName @item.Exams.Teachers.FirstName.Substring(0, 1). @item.Exams.Teachers.MiddleName.Substring(0, 1).</td>
-                    <td>@item.Mark</td>
-                </tr>
-            }
-        </table>
-        <br>
-    </div>
-</body>
-</html>
+        }
+    </table>
+    <br>
+</div>

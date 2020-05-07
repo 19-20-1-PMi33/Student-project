@@ -1,35 +1,23 @@
 ﻿@model Student_project.Model.Students
+
 @{
-    Layout = null;
+    Layout = "~/Views/Home/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+@section Name {
+    @Model.LastName @Model.FirstName @Model.MiddleName
+}
 
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Загальна Інформація</title>
-        <link rel="stylesheet" type="text/css" href="~/css/menu.css">
-    </head>
-    <body>
-        <div class="Menu">
-            <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
-            <button class="full_name" onclick="location.href='@Url.Action("Index", "Home")'">@Model.LastName @Model.FirstName @Model.MiddleName</button>
-            <button class="Exit" onclick="location.href='@Url.Action("Exit", "Home")'">Вихід</button>
-            <button class="Exit" onclick="location.href='@Url.Action("Marks", "Home")'">Семістрові бали</button>
-
-            <div class="Title_1">Кабінет Студента</div>
-
-        </div>
-        <div class="private_inform">
-            <br>
-            <h2 class="title_inf">Загальна інформація</h2>
-            <p>Львівський національний університет імені Івана Франка</p>
-            <p>Факультет <strong>@Model.Groups.Departments.Faculty</strong></p>
-            <p>Кафедра <strong>@Model.Groups.Department</strong></p>
-            <p>Спеціальність <strong>@Model.Specialty</strong></p>
-            <p>Группа <strong>@Model.Group</strong></p>
-            <br>
-        </div>
-    </body>
-</html>
+@section Title {
+    Загальна інформація
+}
+<div class="private_inform">
+    <br>
+    <h2 class="title_inf">Загальна інформація</h2>
+    <p>Львівський національний університет імені Івана Франка</p>
+    <p>Факультет <strong>@Model.Groups.Departments.Faculty</strong></p>
+    <p>Кафедра <strong>@Model.Groups.Department</strong></p>
+    <p>Спеціальність <strong>@Model.Specialty</strong></p>
+    <p>Группа <strong>@Model.Group</strong></p>
+    <br>
+</div>

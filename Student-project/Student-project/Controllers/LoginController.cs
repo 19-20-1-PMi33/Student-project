@@ -36,7 +36,7 @@ namespace Student_project.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                ModelState.AddModelError("", "Невірний логін чи пароль");
             }
             return View("Index");
         }
