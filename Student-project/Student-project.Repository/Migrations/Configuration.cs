@@ -204,6 +204,15 @@
                     context.Marks.AddOrUpdate(mark);
                 }
             }
+
+            Admin admin = new Admin
+            {
+                Login = "admin",
+                Password = "admin"
+            };
+
+            context.Admins.AddOrUpdate(admin);
+
             context.SaveChanges();
             base.Seed(context);
         }

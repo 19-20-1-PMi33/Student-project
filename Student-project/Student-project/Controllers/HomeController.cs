@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Student_project.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Student")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

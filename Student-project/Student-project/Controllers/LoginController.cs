@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Student_project.Repository;
 using Student_project.Form;
-
+using Student_project.Model;
 
 namespace Student_project.Controllers
 {
@@ -25,31 +25,38 @@ namespace Student_project.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(AuthenticationModel student)
+        public async Task<IActionResult> Login(AuthenticationModel user)
         {
             if (ModelState.IsValid)
             {
-                Model.Students user = await db.Students.FirstOrDefaultAsync(u => u.ID == student.Login && u.Password == student.Password);
-                if (user != null)
+                Students student = await db.Students.FirstOrDefaultAsync(u => u.ID == user.Login && u.Password == user.Password);
+                if (student != null)
                 {
-                    await Authenticate(student.Login); // аутентификация
+                    await Authenticate(user.Login,"Student"); 
 
                     return RedirectToAction("Index", "Home");
+                }
+                Admin admin = await db.Admins.FirstOrDefaultAsync(u => u.Login == user.Login && u.Password == user.Password);
+                if (admin != null)
+                {
+                    await Authenticate(user.Login, "Admin"); 
+
+                    return RedirectToAction("Index", "Admin");
                 }
                 ModelState.AddModelError("", "Невірний логін чи пароль");
             }
             return View("Index");
         }
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(string userName, string role)
         {
-            // создаем один claim
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
             };
-            // создаем объект ClaimsIdentity
+            
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
+            
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
     }
