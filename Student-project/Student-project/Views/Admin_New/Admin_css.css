@@ -1,0 +1,35 @@
+body{
+	background-color: #191919 	 ;
+	margin:0;
+	background-size: cover;
+}
+button{
+	background-image: none; 
+  background: transparent;
+  background-color: transparent;
+  color:#c3d2d7;
+  border:0;
+  margin-top: 30px;
+  width: 150px;
+}
+
+/*Menu*/
+
+.Menu{
+	float: left;
+	height: 100%;
+	position: fixed;
+	width: 150px;
+	margin: 0;
+	background:#3e383e;
+	
+}
+.gerb{
+	margin: 30px auto;
+	width:70px;
+	height:80px;
+	margin-bottom: 0px;
+	
+}
+
+/*Body*/

@@ -1,0 +1,114 @@
+body{
+	background-color: #191919 	 ;
+	margin:0;
+	background-size: cover;
+}
+button{
+	background-image: none; 
+  background: transparent;
+  background-color: transparent;
+  color:#c3d2d7;
+  border:0;
+  margin-top: 30px;
+  width: 150px;
+}
+
+/*Menu*/
+
+.Menu{
+	float: left;
+	height: 100%;
+	position: fixed;
+	width: 150px;
+	margin: 0;
+	background:#3e383e;	
+}
+.gerb{
+	margin: 30px auto;
+	width:70px;
+	height:80px;
+	margin-bottom: 0px;
+}
+
+
+/*Body*/
+.inform{
+	padding-top:30px;
+	width: 1000px;
+	margin-left: 150px;
+	height: 100%;
+}
+
+/*Input student*/
+
+.new_student{
+margin-left: auto; 
+width: 800px;
+height: 400px;
+border-radius: 10px;
+background:#c3d2d7;
+}
+
+p{
+	color: #191919;
+	padding-left: 80px;
+	font-size: 18px; 
+}
+
+input{
+	height: 19px;
+	width: 313px;
+	border:0;
+	border-radius: 5px;
+	margin-bottom: 18px;
+}
+select{
+	border:0;
+	width: 313px;
+	height: 21px;
+	border-radius: 5px;
+	margin-bottom: 18px;
+}
+h2{
+	color: #191919 ;
+	padding-left: 45px; 
+}
+.text_inf{
+	width: 400px;
+	float: left;
+}
+.input_inf{
+	margin-top:18px;
+	width: 400px;
+	float: right;
+}
+
+
+/*Delete student*/
+.delete_student{
+margin-top: 30px;
+margin-left: auto; 
+width: 800px;
+height: 270px;
+border-radius: 10px;
+background:#c3d2d7;
+}
+
+
+.text_inf_del{
+	width: 400px;
+	float: left;
+}
+.input_inf_del{
+	margin-top:18px;
+	width: 400px;
+	float: right;
+}
+.delete, .input{
+	border:0;
+	height: 21px;
+	border-radius: 5px;
+	margin-left: 331px;
+	margin-top:0px;
+	background-color: #3e383e;
+}
