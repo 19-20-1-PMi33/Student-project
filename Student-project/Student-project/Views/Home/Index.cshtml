@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Student_project.Model.Students
+
+@{
+    Layout = "~/Views/Home/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Name {
+    @Model.LastName @Model.FirstName @Model.MiddleName
+}
+
+@section Title {
+    Загальна інформація
+}
+<div class="private_inform">
+    <br>
+    <h2 class="title_inf">Загальна інформація</h2>
+    <p>Львівський національний університет імені Івана Франка</p>
+    <p>Факультет <strong>@Model.Groups.Departments.Faculty</strong></p>
+    <p>Кафедра <strong>@Model.Groups.Department</strong></p>
+    <p>Спеціальність <strong>@Model.Specialty</strong></p>
+    <p>Группа <strong>@Model.Group</strong></p>
+    <br>
 </div>

@@ -10,7 +10,7 @@ namespace Student_project.Repository
 {
     public class CDBContext: DbContext
     {
-        public CDBContext() : base("UniverDB")
+        public CDBContext() : base("UniverDataBase")
         {
             
         }
@@ -21,5 +21,6 @@ namespace Student_project.Repository
         public DbSet<Subjects> Subjects { get; set; }
         public DbSet<Teachers> Teachers{ get; set; }
         public DbSet<Marks> Marks { get; set; }
+        public DbSet<Admin> Admins { get; set; }
     }
 }

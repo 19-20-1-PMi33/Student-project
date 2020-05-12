@@ -1,8 +1,9 @@
-﻿
+﻿@model Student_project.Form.AuthenticationModel;
+
 @{
     Layout = null;
-    ViewBag.Title = "Логін";
 }
+
 
 <!DOCTYPE html>
 
@@ -11,17 +12,41 @@
     <meta name="viewport" content="width=device-width" />
     <title>Авторизація</title>
     <link rel="stylesheet" type="text/css" href="~/css/site.css">
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
-    <div class="login-page">
-        <div class="form">
-            <p class="text">Авторизація</p>
-            <form class="login-form" method="post" asp-action="Login">
-                <input type="text" name="UserName" placeholder="Логін" />
-                <input type="password" name="Password" placeholder="Пароль" />
-                <button type="submit">Увійти</button>
-            </form>
+    <header>
+        <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
+
+        <div class="Title_1">Кабінет Студента</div>
+    </header>
+    <div class="Window">
+        <div class="text">
+            <h3>Авторизація Користувача</h3>
         </div>
+        <form asp-action="Login" asp-anti-forgery="true">
+            @*<div class="validation" asp-validation-summary="ModelOnly" />*@
+            @Html.ValidationSummary(true, "", new { @style = "color:red;" })
+            <div class="Surname">
+                <h4>Логін:</h4>
+                <input class="input_sur" type="text" asp-for="Login" size="40"><br />
+                @Html.ValidationMessageFor(m => m.Login, "", new { @style = "color:red" })
+                @*<br><span class="field-validation-valid" asp-validation-for="Login"></span><br>*@
+            </div>
+            <div class="Password">
+                <h4>Пароль:</h4>
+                <input class="input_pas" type="password" asp-for="Password" size="40"><br />
+                @Html.ValidationMessageFor(m => m.Login, "", new { @style = "color:red" })
+                @*<br><span class="field-validation-valid" asp-validation-for="Password"></span><br>*@
+            </div>
+
+            <button class="Log_in" type="submit">Вхід</button>
+        </form>
+        <div class="text_1">
+            <h4>При першому вході в персональний кабінет студента потрібно використовувати замість пароля<br> № залікової книжки.</h4>
+        </div>
+
     </div>
 </body>
 </html>

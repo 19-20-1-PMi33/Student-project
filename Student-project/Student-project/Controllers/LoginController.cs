@@ -1,32 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Student_project.Repository;
-
+using Student_project.Form;
+using Student_project.Model;
 
 namespace Student_project.Controllers
 {
     public class LoginController : Controller
     {
         CDBContext db = new CDBContext();
-        public IActionResult Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
         [HttpPost]
-        [ActionName("Login")]
-        public ActionResult LoginIntoSite(string UserName, string Password)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(AuthenticationModel user)
         {
-            if(db.Students.Find(UserName) != null && Password == UserName)
+            if (ModelState.IsValid)
             {
-                return Redirect("/Home/Index");
+                Students student = await db.Students.FirstOrDefaultAsync(u => u.ID == user.Login && u.Password == user.Password);
+                if (student != null)
+                {
+                    await Authenticate(user.Login,"Student"); 
+
+                    return RedirectToAction("Index", "Home");
+                }
+                Admin admin = await db.Admins.FirstOrDefaultAsync(u => u.Login == user.Login && u.Password == user.Password);
+                if (admin != null)
+                {
+                    await Authenticate(user.Login, "Admin"); 
+
+                    return RedirectToAction("Index", "Admin");
+                }
+                ModelState.AddModelError("", "Невірний логін чи пароль");
             }
-            else
+            return View("Index");
+        }
+        private async Task Authenticate(string userName, string role)
+        {
+            var claims = new List<Claim>
             {
-                return Content($"Невірний логін чи пароль");
-            }
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
+            };
+            
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
     }
 }

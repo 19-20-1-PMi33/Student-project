@@ -20,60 +20,198 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-            List<Students> studensts = new List<Students>
+            List<Departments> departments = new List<Departments>
+            {
+                new Departments
                 {
-                    new Students
-                    {
-                        ID = "123456c",
-                        LastName = "Громов",
-                        FirstName = "Вадим",
-                        MiddleName = "Глібович",
-                        Group = "ПМІ-33"
-                    },
-                    new Students
-                    {
-                        ID = "123457c",
-                        LastName = "Бобеляк",
-                        FirstName = "Тарас",
-                        MiddleName = "Степанович",
-                        Group = "ПМІ-33"
-                    },
-                    new Students
-                    {
-                        ID = "123458c",
-                        LastName = "Чемерський",
-                        FirstName = "Влад",
-                        MiddleName = "Анатолійович",
-                        Group = "ПМІ-33"
-                    }
-                };
+                    Title = "Програмування",
+                    Faculty = "Факультет прикладної математики та інформатики",
+                },
+                new Departments
+                {
+                    Title = "Інформаційних систем",
+                    Faculty = "Факультет прикладної математики та інформатики",
+                },
+                new Departments
+                {
+                    Title = "Дискретного аналізу та інтелектуальних систем",
+                    Faculty = "Факультет прикладної математики та інформатики",
+                }
+            };
+            foreach (Departments department in departments)
+            {
+                context.Departments.AddOrUpdate(department);
+            }
 
             List<Groups> groups = new List<Groups>
+            {
+                new Groups
                 {
-                    new Groups
-                    {
-                        GroupName = "ПМІ-31",
-                        Department = "Програмування"
-                    },
-                    new Groups
-                    {
-                        GroupName = "ПМІ-32",
-                        Department = "Інформаційних систем",
-                    },
-                    new Groups
-                    {
-                        GroupName = "ПМІ-33",
-                        Department = "Дискретного аналізу та інтелектуальних систем",
-                    }
-                };
-
+                    GroupName = "ПМІ-31",
+                    Department = "Програмування"
+                },
+                new Groups
+                {
+                    GroupName = "ПМІ-32",
+                    Department = "Інформаційних систем",
+                },
+                new Groups
+                {
+                    GroupName = "ПМІ-33",
+                    Department = "Дискретного аналізу та інтелектуальних систем",
+                }
+            };
             foreach (Groups group in groups)
             {
                 context.Groups.AddOrUpdate(group);
             }
 
+            List<Students> studensts = new List<Students>
+            {
+                new Students
+                {
+                    ID = "123456c",
+                    LastName = "Громов",
+                    FirstName = "Вадим",
+                    MiddleName = "Глібович",
+                    Group = "ПМІ-33",
+                    Specialty = "Комп'ютерні науки",
+                    Password = "123456c"
+                },
+                new Students
+                {
+                    ID = "123457c",
+                    LastName = "Бобеляк",
+                    FirstName = "Тарас",
+                    MiddleName = "Степанович",
+                    Group = "ПМІ-33",
+                    Specialty = "Комп'ютерні науки",
+                    Password = "123457c"
+                },
+                new Students
+                {
+                    ID = "123458c",
+                    LastName = "Чемерський",
+                    FirstName = "Влад",
+                    MiddleName = "Анатолійович",
+                    Group = "ПМІ-33",
+                    Specialty = "Комп'ютерні науки",
+                    Password = "123458c"
+                }
+            };
+
             foreach (Students student in studensts)
+            {
                 context.Students.AddOrUpdate(student);
+            }
+
+            List<Teachers> teachers = new List<Teachers>
+            {
+                new Teachers
+                {
+                    ID = 1,
+                    LastName = "Притула",
+                    FirstName = "Микола",
+                    MiddleName = "Миколайович",
+                    Department = "Дискретного аналізу та інтелектуальних систем",
+                    Type = "Професор"
+                },
+                new Teachers
+                {
+                    ID = 2,
+                    LastName = "Рикалюк",
+                    FirstName = "Роман",
+                    MiddleName = "Євстахович",
+                    Department = "Програмування",
+                    Type = "Доцент"
+                }
+            };
+
+            foreach (Teachers teacher in teachers)
+            {
+                if (context.Teachers.Count(x => x.LastName == teacher.LastName && x.FirstName == teacher.FirstName) < 1)
+                {
+                    context.Teachers.AddOrUpdate(teacher);
+                }
+            }
+
+            List<Subjects> subjects = new List<Subjects>
+            {
+                new Subjects
+                {
+                    Title = "ТІМС",
+                    Hours = 120,
+                    Credits = 80
+                },
+                new Subjects
+                {
+                    Title = "Комп'ютерні інформаційні мережі",
+                    Hours = 120,
+                    Credits = 80
+                }
+            };
+
+            foreach (Subjects subject in subjects)
+            {
+                context.Subjects.AddOrUpdate(subject);
+            }
+
+            List<Exams> exams = new List<Exams>
+            {
+                new Exams
+                {
+                    Subject = "ТІМС",
+                    Teacher = 15,
+                    GroupName = "ПМІ-33"
+                },
+                new Exams
+                {
+                    Subject = "Комп'ютерні інформаційні мережі",
+                    Teacher = 16,
+                    GroupName = "ПМІ-33"
+                }
+            };
+
+            foreach (Exams exam in exams)
+            {
+                if (context.Exams.Count(x => x.Subject == exam.Subject && x.Teacher == exam.Teacher && x.GroupName == exam.GroupName) < 1)
+                {
+                    context.Exams.AddOrUpdate(exam);
+                }
+            }
+
+            List<Marks> marks = new List<Marks>
+            {
+                new Marks
+                {
+                    StudentId = "123456c",
+                    Date = new DateTime(2019,12,26).Date,
+                    Exam = 1,
+                    Mark = 68
+                },
+                new Marks
+                {
+                    StudentId = "123456c",
+                    Date = new DateTime(2019,12,29).Date,
+                    Exam = 2,
+                    Mark = 90
+                }
+            };
+            foreach (Marks mark in marks)
+            {
+                if (context.Marks.Count(x => x.StudentId == mark.StudentId && x.Exam == mark.Exam) < 1)
+                {
+                    context.Marks.AddOrUpdate(mark);
+                }
+            }
+
+            Admin admin = new Admin
+            {
+                Login = "admin",
+                Password = "admin"
+            };
+
+            context.Admins.AddOrUpdate(admin);
 
             context.SaveChanges();
             base.Seed(context);
