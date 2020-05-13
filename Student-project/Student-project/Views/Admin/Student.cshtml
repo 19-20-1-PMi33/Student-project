@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Student_project.Model.Students>
+@using System.Linq;
+@{
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 
@@ -24,24 +26,27 @@
             <input class="input_sur" type="text">
             <input class="input_num_book" type="text">
 
-            <select class="input_faculty" name="Факультет">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+            <select class="input_faculty" id="faculty" name="Факультет">
+                @foreach (var item in Model.Select(x=>x.Groups.Departments.Faculties).OrderBy(x=>x.Title).Distinct())
+                {
+                    <option>@item.Title</option>
+                }
             </select>
 
-            <select class="input_kafedra" name="Кафедра">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+            <select class="input_kafedra" id="kafedra" name="Кафедра">
+                @foreach (var item in Model.Select(x => x.Groups.Departments).OrderBy(x=>x.Title).Distinct())
+                {
+                    <option>@item.Title</option>
+                }
             </select>
 
-            <select class="input_specialty" name="Спеціальність">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
-            </select>
+            <input class="input_num_book" type="text">
 
-            <select class="input_groupe" name="Група">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+            <select class="input_groupe" id="group" name="Група">
+                @foreach (var item in Model.Select(x => x.Groups).OrderBy(x=>x.GroupName).Distinct())
+                {
+                    <option>@item.GroupName</option>
+                }
             </select>
 
         </div>
@@ -54,6 +59,7 @@
         <h2>Видалити студента</h2>
         <div class="text_inf_del">
             <p>Факультет:  </p>
+            <p>Кафедра:  </p>
             <p>Группа:  </p>
             <p>ПІБ Студента:  </p>
         </div>
@@ -61,17 +67,28 @@
         <div class="input_inf_del">
 
             <select class="del_faculty" name="Факультет">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                @foreach (var item in Model.Select(x => x.Groups.Departments.Faculties).OrderBy(x => x.Title).Distinct())
+                {
+                    <option>@item.Title</option>
+                }
             </select>
-
+            <select class="input_kafedra" id="kafedra" name="Кафедра">
+                @foreach (var item in Model.Select(x => x.Groups.Departments).OrderBy(x => x.Title).Distinct())
+                {
+                    <option>@item.Title</option>
+                }
+            </select>
             <select class="del_groupe" name="Група">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                @foreach (var item in Model.Select(x => x.Groups).OrderBy(x => x.GroupName).Distinct())
+                {
+                    <option>@item.GroupName</option>
+                }
             </select>
             <select class="del_stud" name="Студент">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                @foreach (var item in Model.OrderBy(x => x.LastName).Distinct())
+                {
+                    <option>@item.LastName @item.FirstName @item.MiddleName</option>
+                }
             </select>
         </div>
         <button class="delete">Видалити дані</button>

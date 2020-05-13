@@ -20,6 +20,20 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+
+            List<Faculties> faculties = new List<Faculties>()
+            {
+                new Faculties
+                {
+                    Title = "Факультет прикладної математики та інформатики",
+                }
+            };
+
+            foreach (Faculties faculty in faculties)
+            {
+                context.Faculties.AddOrUpdate(faculty);
+            }
+
             List<Departments> departments = new List<Departments>
             {
                 new Departments
@@ -114,7 +128,8 @@
                     FirstName = "Микола",
                     MiddleName = "Миколайович",
                     Department = "Дискретного аналізу та інтелектуальних систем",
-                    Type = "Професор"
+                    Type = "Професор",
+                    Email = "prytula@gmail.com"
                 },
                 new Teachers
                 {
@@ -123,7 +138,8 @@
                     FirstName = "Роман",
                     MiddleName = "Євстахович",
                     Department = "Програмування",
-                    Type = "Доцент"
+                    Type = "Доцент",
+                    Email = "rykaluk@gmail.com"
                 }
             };
 

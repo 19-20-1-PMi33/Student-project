@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Student_project.Model.Marks>
+﻿@model List<Student_project.Model.Marks>
 @{
     Layout = "~/Views/Home/_Layout.cshtml";
 }
@@ -53,14 +53,16 @@
             <th>Години</th>
             <th>Викладач</th>
             <th>Бал</th>
+            <th>wqe</th>
+            <th>test</th>
         </tr>
-        @foreach (var item in Model)
+        @for (int i = 0; i < Model.Count; i++)
         {
             <tr>
-                <td>@item.Exams.Subject</td>
-                <td>@item.Exams.Subjects.Hours</td>
-                <td>@item.Exams.Teachers.LastName @item.Exams.Teachers.FirstName.Substring(0, 1). @item.Exams.Teachers.MiddleName.Substring(0, 1).</td>
-                <td>@item.Mark</td>
+                <td>@Model[i].Exams.Subject</td>
+                <td>@Model[i].Exams.Subjects.Hours</td>
+                <td>@Model[i].Exams.Teachers.LastName @Model[i].Exams.Teachers.FirstName.Substring(0, 1). @Model[i].Exams.Teachers.MiddleName.Substring(0, 1).</td>
+                <td>@Model[i].Mark</td>
             </tr>
         }
     </table>
