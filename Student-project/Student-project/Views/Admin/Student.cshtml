@@ -85,7 +85,7 @@
                 }
             </select>
             <select class="del_stud" name="Студент">
-                @foreach (var item in Model.OrderBy(x => x.LastName).Distinct())
+                @foreach (var item in Model.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ThenBy(x => x.MiddleName).Distinct())
                 {
                     <option>@item.LastName @item.FirstName @item.MiddleName</option>
                 }

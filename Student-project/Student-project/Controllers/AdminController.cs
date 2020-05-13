@@ -29,7 +29,11 @@ namespace Student_project.Controllers
         }
         public IActionResult Teacher()
         {
-            return View();
+            var teachers = db.Teachers
+                .Include(x => x.Departments)
+                .Include(x => x.Departments.Faculties)
+                .ToList();
+            return View(teachers);
         }
         public IActionResult AcGroup()
         {
