@@ -1,7 +1,11 @@
-﻿@{
+﻿@model List<Student_project.Model.Exams>
+
+@{
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
-
+@{
+    Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
+}
 @section Title {
     Академічні группи
 }
@@ -13,6 +17,7 @@
         <h2>Зміни навчального плану:</h2>
         <div class="text_inf">
             <p>Факультет:  </p>
+            <p>Кафедра:  </p>
             <p>Викладач: </p>
             <p>Предмет:  </p>
             <p>Група:  </p>
@@ -21,23 +26,42 @@
         <div class="input_inf">
 
             <select class="input_faculty" name="Факультет">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                <option hidden selected> -- Виберіть факультет -- </option>
+                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
+                {
+                    <option>@item.Title</option>
+                }
+            </select>
+            <select class="input_kafedra" name="Кафедра">
+                <option hidden selected> -- Виберіть кафедру -- </option>
+                @foreach (var item in db.Departments.OrderBy(x => x.Title))
+                {
+                    <option>@item.Title</option>
+                }
             </select>
 
             <select class="input_teacher" name="Викладач">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                <option hidden selected> -- Виберіть викладача -- </option>
+                @foreach (var item in db.Teachers.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ThenBy(x => x.MiddleName))
+                {
+                    <option>@item.LastName @item.FirstName @item.MiddleName</option>
+                }
             </select>
 
             <select class="input_subject" name="Предмет">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                <option hidden selected> -- Виберіть предмет -- </option>
+                @foreach (var item in db.Subjects.OrderBy(x => x.Title))
+                {
+                    <option>@item.Title</option>
+                }
             </select>
 
             <select class="input_groupe" name="Група">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                <option hidden selected> -- Виберіть групу -- </option>
+                @foreach (var item in db.Groups.OrderBy(x => x.GroupName))
+                {
+                    <option>@item.GroupName</option>
+                }
             </select>
 
         </div>
@@ -50,24 +74,51 @@
         <h2>Видалити предмет з навчального плану: </h2>
         <div class="text_inf_del">
             <p>Факультет:  </p>
-            <p>Группа:  </p>
+            <p>Кафедра:  </p>
+            <p>Викладач: </p>
             <p>Предмет:  </p>
+            <p>Група:  </p>
         </div>
 
         <div class="input_inf_del">
 
             <select class="del_faculty" name="Факультет">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                <option hidden selected> -- Виберіть факультет -- </option>
+                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
+                {
+                    <option>@item.Title</option>
+                }
+            </select>
+            <select class="del_kafedra" name="Кафедра">
+                <option hidden selected> -- Виберіть кафедру -- </option>
+                @foreach (var item in db.Departments.OrderBy(x => x.Title))
+                {
+                    <option>@item.Title</option>
+                }
+            </select>
+
+            <select class="del_teacher" name="Викладач">
+                <option hidden selected> -- Виберіть викладача -- </option>
+                @foreach (var item in db.Teachers.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ThenBy(x => x.MiddleName))
+                {
+                    <option>@item.LastName @item.FirstName @item.MiddleName</option>
+                }
+            </select>
+
+            <select class="del_subject" name="Предмет">
+                <option hidden selected> -- Виберіть предмета -- </option>
+                @foreach (var item in db.Subjects.OrderBy(x => x.Title))
+                {
+                    <option>@item.Title</option>
+                }
             </select>
 
             <select class="del_groupe" name="Група">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
-            </select>
-            <select class="del_subject" name="Предмет">
-                <option>Пункт 1</option>
-                <option>Пункт 2</option>
+                <option hidden selected> -- Виберіть групу -- </option>
+                @foreach (var item in db.Groups.OrderBy(x => x.GroupName))
+                {
+                    <option>@item.GroupName</option>
+                }
             </select>
         </div>
         <button class="delete">Видалити дані</button>

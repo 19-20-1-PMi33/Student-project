@@ -1,7 +1,10 @@
 ﻿@model List<Student_project.Model.Students>
-@using System.Linq;
+
 @{
     Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@{
+    Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
 }
 
 @section Title {
@@ -27,14 +30,16 @@
             <input class="input_num_book" type="text">
 
             <select class="input_faculty" id="faculty" name="Факультет">
-                @foreach (var item in Model.Select(x=>x.Groups.Departments.Faculties).OrderBy(x=>x.Title).Distinct())
+                <option hidden selected> -- Виберіть факультет -- </option>
+                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
                 {
                     <option>@item.Title</option>
                 }
             </select>
 
             <select class="input_kafedra" id="kafedra" name="Кафедра">
-                @foreach (var item in Model.Select(x => x.Groups.Departments).OrderBy(x=>x.Title).Distinct())
+                <option hidden selected> -- Виберіть кафедру -- </option>
+                @foreach (var item in db.Departments.OrderBy(x => x.Title))
                 {
                     <option>@item.Title</option>
                 }
@@ -43,7 +48,8 @@
             <input class="input_num_book" type="text">
 
             <select class="input_groupe" id="group" name="Група">
-                @foreach (var item in Model.Select(x => x.Groups).OrderBy(x=>x.GroupName).Distinct())
+                <option hidden selected> -- Виберіть групу -- </option>
+                @foreach (var item in db.Groups.OrderBy(x => x.GroupName))
                 {
                     <option>@item.GroupName</option>
                 }
@@ -67,25 +73,29 @@
         <div class="input_inf_del">
 
             <select class="del_faculty" name="Факультет">
-                @foreach (var item in Model.Select(x => x.Groups.Departments.Faculties).OrderBy(x => x.Title).Distinct())
+                <option hidden selected> -- Виберіть факультет -- </option>
+                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
                 {
                     <option>@item.Title</option>
                 }
             </select>
             <select class="input_kafedra" id="kafedra" name="Кафедра">
-                @foreach (var item in Model.Select(x => x.Groups.Departments).OrderBy(x => x.Title).Distinct())
+                <option hidden selected> -- Виберіть кафедру -- </option>
+                @foreach (var item in db.Departments.OrderBy(x => x.Title))
                 {
                     <option>@item.Title</option>
                 }
             </select>
             <select class="del_groupe" name="Група">
-                @foreach (var item in Model.Select(x => x.Groups).OrderBy(x => x.GroupName).Distinct())
+                <option hidden selected> -- Виберіть групу -- </option>
+                @foreach (var item in db.Groups.OrderBy(x => x.GroupName))
                 {
                     <option>@item.GroupName</option>
                 }
             </select>
             <select class="del_stud" name="Студент">
-                @foreach (var item in Model.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ThenBy(x => x.MiddleName).Distinct())
+                <option hidden selected> -- Виберіть студента -- </option>
+                @foreach (var item in db.Students.OrderBy(x => x.LastName))
                 {
                     <option>@item.LastName @item.FirstName @item.MiddleName</option>
                 }

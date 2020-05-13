@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Student_project.Repository;
@@ -37,7 +39,19 @@ namespace Student_project.Controllers
         }
         public IActionResult AcGroup()
         {
-            return View();
+            var exams = db.Exams
+                .Include(x => x.Groups)
+                .Include(x => x.Teachers)
+                .Include(x => x.Groups.Departments)
+                .Include(x => x.Groups.Departments.Faculties)
+                .Include(x => x.Subjects)
+                .ToList();
+            return View(exams);
+        }
+        public async Task<IActionResult> Exit()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Login");
         }
     }
 }
