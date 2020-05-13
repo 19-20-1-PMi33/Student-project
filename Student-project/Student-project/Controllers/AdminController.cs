@@ -14,5 +14,18 @@ namespace Student_project.Controllers
         {
             return View();
         }
+
+        public IActionResult Student()
+        {
+            return View();
+        }
+        public IActionResult Teacher()
+        {
+            return View();
+        }
+        public IActionResult AcGroup()
+        {
+            return View();
+        }
     }
 }

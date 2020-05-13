@@ -36,10 +36,10 @@ namespace Student_project.Controllers
 
             return View(student);
         }
-        public IActionResult Marks()
+        public async Task<IActionResult> Marks()
         {
             string user = User.Identity.Name;
-            var student = db.Students.Find(user);
+            var student = await db.Students.FindAsync(user);
             double groupMark = db.Marks.Where(x => x.Students.Group == student.Group).Sum(x => x.Mark) / db.Marks.Count(x => x.Students.Group == student.Group);
             ViewBag.GroupMark = groupMark;
             var marks = db.Marks.Where(x=>x.StudentId == user)
@@ -51,11 +51,6 @@ namespace Student_project.Controllers
             return View(marks);
         }
 
-        //public IActionResult Exit()
-        //{
-        //    HttpContext.Response.Cookies.Delete("UserId");
-        //    return RedirectToAction("Index", "Login");
-        //}
         public async Task<IActionResult> Exit()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

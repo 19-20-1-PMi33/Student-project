@@ -4,13 +4,20 @@
 }
 
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>View</title>
-    </head>
-    <body>
-        <p>Admin Page</p>
-    </body>
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="~/css/admin.css">
+    <meta charset="utf-8">
+</head>
+<body>
+    <div class="Menu">
+        <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
+        <button class="Admin">Адміністратор</button>
+        <button class="Teacher" onclick="location.href='@Url.Action("Teacher", "Admin")'">Викладач</button>
+        <button class="Stud" onclick="location.href='@Url.Action("Student", "Admin")'">Студент</button>
+        <button class="Groupe" onclick="location.href='@Url.Action("Student", "Admin")'">Академічні групи</button>
+        <button class="Exit">Вихід</button>
+    </div>
+</body>
 </html>
