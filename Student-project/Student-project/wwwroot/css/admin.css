@@ -38,7 +38,7 @@ button {
     padding-top: 30px;
     width: 1000px;
     margin-left: 150px;
-    height: 100%;
+    height: auto;
 }
 
 /*Input student*/
