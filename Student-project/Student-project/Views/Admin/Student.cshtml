@@ -20,44 +20,33 @@
             <p>ПІБ Студента:  </p>
             <p>Номер залікової книги:</p>
             <p>Факультет:  </p>
-            <p>Кафедра: </p>
-            <p>Напрям підготовки:  </p>
             <p>Группа:  </p>
+            <p>Напрям підготовки:  </p>
         </div>
 
         <div class="input_inf">
-            <input class="input_sur" type="text">
-            <input class="input_num_book" type="text">
+            <form asp-action="AddStudent" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
+                <input class="input_sur" type="text" name="FullNameAdd">
+                <input class="input_num_book" type="text" name="StudentIdAdd">
 
-            <select class="input_faculty" id="faculty" name="Факультет">
-                <option hidden selected> -- Виберіть факультет -- </option>
-                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
-                {
-                    <option>@item.Title</option>
-                }
-            </select>
+                <select id="FacultySelectAdd" name="FacultyAdd">
+                    <option hidden selected> </option>
+                    @*<option>---</option>*@
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title).Select(x => x.Title))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+                <select id="GroupSelectAdd" name="GroupAdd">
+                </select>
 
-            <select class="input_kafedra" id="kafedra" name="Кафедра">
-                <option hidden selected> -- Виберіть кафедру -- </option>
-                @foreach (var item in db.Departments.OrderBy(x => x.Title))
-                {
-                    <option>@item.Title</option>
-                }
-            </select>
-
-            <input class="input_num_book" type="text">
-
-            <select class="input_groupe" id="group" name="Група">
-                <option hidden selected> -- Виберіть групу -- </option>
-                @foreach (var item in db.Groups.OrderBy(x => x.GroupName))
-                {
-                    <option>@item.GroupName</option>
-                }
-            </select>
-
+                <input class="input_num_book" type="text" name="Spec">
+                <button class="input" type="submit">Внести дані</button>
+                <br>
+            </form>
         </div>
-        <button class="input">Внести дані</button>
-        <br>
+        
     </div>
 
     <div class="delete_student">
@@ -65,43 +54,29 @@
         <h2>Видалити студента</h2>
         <div class="text_inf_del">
             <p>Факультет:  </p>
-            <p>Кафедра:  </p>
             <p>Группа:  </p>
             <p>ПІБ Студента:  </p>
         </div>
 
         <div class="input_inf_del">
+            <form asp-action="DeleteStudent" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
+                <select id="FacultySelect" name="FacultyDelete">
+                    <option hidden selected> </option>
+                    @*<option>---</option>*@
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title).Select(x => x.Title))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
 
-            <select class="del_faculty" name="Факультет">
-                <option hidden selected> -- Виберіть факультет -- </option>
-                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
-                {
-                    <option>@item.Title</option>
-                }
-            </select>
-            <select class="input_kafedra" id="kafedra" name="Кафедра">
-                <option hidden selected> -- Виберіть кафедру -- </option>
-                @foreach (var item in db.Departments.OrderBy(x => x.Title))
-                {
-                    <option>@item.Title</option>
-                }
-            </select>
-            <select class="del_groupe" name="Група">
-                <option hidden selected> -- Виберіть групу -- </option>
-                @foreach (var item in db.Groups.OrderBy(x => x.GroupName))
-                {
-                    <option>@item.GroupName</option>
-                }
-            </select>
-            <select class="del_stud" name="Студент">
-                <option hidden selected> -- Виберіть студента -- </option>
-                @foreach (var item in db.Students.OrderBy(x => x.LastName))
-                {
-                    <option>@item.LastName @item.FirstName @item.MiddleName</option>
-                }
-            </select>
+                <select id="GroupSelect" name="GroupDelete">
+                </select>
+
+                <select id="fullNameSelect" name="StudentIdDelete">
+                </select>
+                <button class="delete">Видалити дані</button>
+            </form>
         </div>
-        <button class="delete">Видалити дані</button>
-        <br>
     </div>
 </div>
