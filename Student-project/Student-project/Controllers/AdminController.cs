@@ -76,7 +76,6 @@ namespace Student_project.Controllers
             {
                 var model = db.Students.Where(x => x.Group == group).ToList();
 
-
                 return PartialView("StudentPartial", model);
             }
             catch(ArgumentException ex)
@@ -121,6 +120,82 @@ namespace Student_project.Controllers
             db.Students.Remove(student);
             db.SaveChanges();
             return View("Student", db.Students.ToList());
+        }
+
+        [HttpGet]
+        public IActionResult GetDepartmentsByFaculty(string faculty)
+        {
+            try
+            {
+                var model = db.Departments.Where(x => x.Faculties.Title == faculty).ToList();
+
+                return PartialView("DepartmentPartial", model);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return PartialView("DepartmentPartial", db.Departments.ToList());
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddTeacher()
+        {
+            var fullname = Request.Form["FullNameAdd"].ToString();
+            var department = Request.Form["DepartmentAdd"].ToString();
+            var stupin = Request.Form["StupinAdd"].ToString();
+            var email = Request.Form["EmailAdd"].ToString();
+            var password = Request.Form["PasswordAdd"].ToString();
+            var fullnamesplit = fullname.Trim().Replace("  ", " ").Split(" ");
+
+            var teacher = new Teachers
+            {
+                LastName = fullnamesplit[0],
+                FirstName = fullnamesplit[1],
+                MiddleName = fullnamesplit[2],
+                Department = department,
+                Email = email,
+                Type = stupin
+            };
+            db.Teachers.Add(teacher);
+            db.SaveChanges();
+            return View("Teacher", db.Teachers.ToList());
+        }
+        [HttpGet]
+        public IActionResult GetTeachersByDepartment(string department)
+        {
+            try
+            {
+                var model = db.Teachers.Where(x => x.Department == department).ToList();
+
+                return PartialView("TeacherPartial", model);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return PartialView("TeacherPartial", db.Teachers.ToList());
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteTeacher()
+        {
+            var teachersId = Convert.ToInt32(Request.Form["TeacherIdDelete"].ToString());
+            foreach (var item in db.Marks.Where(x=>x.Exams.Teacher == teachersId))
+            {
+                db.Marks.Remove(item);
+            }
+            foreach (var item in db.Exams.Where(x => x.Teacher == teachersId))
+            {
+                db.Exams.Remove(item);
+            }
+            var teacher = db.Teachers.Find(teachersId);
+            db.Teachers.Remove(teacher);
+            db.SaveChanges();
+
+            return View("Teacher", db.Teachers.ToList());
         }
     }
 }

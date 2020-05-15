@@ -60,3 +60,60 @@ var getGroupsByFacultyAdd = function (faculty) {
         }
     });
 };
+
+$("#FacultySelectAdd1").change(function () {
+    let faculty = document.getElementById("FacultySelectAdd1").value;
+    getDepartmentsByFacultyAdd(faculty);
+});
+
+var getDepartmentsByFacultyAdd = function (faculty) {
+    $.ajax({
+        type: "GET",
+        url: "/Admin/GetDepartmentsByFaculty",
+        data: 'faculty=' + faculty,
+        success: function (data) {
+            $("select[id=DepartmentSelect]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+
+$("#FacultySelectDelete").change(function () {
+    let faculty = document.getElementById("FacultySelectDelete").value;
+    getDepartmentsByFacultyDelete(faculty);
+    $("select[id=fullNameSelect]").html("");
+});
+
+$("#DepartmentSelectDelete").change(function () {
+    let department = document.getElementById("DepartmentSelectDelete").value;
+    getTeacherByDepartmentDelete(department);
+});
+
+var getDepartmentsByFacultyDelete = function (faculty) {
+    $.ajax({
+        type: "GET",
+        url: "/Admin/GetDepartmentsByFaculty",
+        data: 'faculty=' + faculty,
+        success: function (data) {
+            $("select[id=DepartmentSelectDelete]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+var getTeacherByDepartmentDelete = function (department) {
+    $.ajax({
+        type: "GET",
+        url: "/Admin/GetTeachersByDepartment",
+        data: 'department=' + department,
+        success: function (data) {
+            $("select[id=fullNameSelect]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
