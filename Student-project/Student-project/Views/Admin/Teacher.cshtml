@@ -25,37 +25,35 @@
         </div>
 
         <div class="input_inf">
-            <input class="input_sur" type="text">
+            <form asp-action="AddTeacher" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All"></div>
+                <input class="input_sur" type="text" name="FullNameAdd">
 
-            <select class="input_faculty" name="Факультет">
-                <option hidden selected> -- Виберіть факультет -- </option>
-                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
-                {
-                    <option>@item.Title</option>
-                }
-            </select>
+                <select id="FacultySelectAdd1" name="FacultyAdd">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title).Select(x=>x.Title))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
 
-            <select class="input_kafedra" name="Кафедра">
-                <option hidden selected> -- Виберіть кафедру -- </option>
-                @foreach (var item in db.Departments.OrderBy(x => x.Title))
-                {
-                    <option>@item.Title</option>
-                }
-            </select>
+                <select id="DepartmentSelect" name="DepartmentAdd">
 
-            <select class="input_academic_degree" name="Ступінь">
-                <option hidden selected> -- Виберіть ступінь -- </option>
-                <option>Асистент</option>
-                <option>Доцент</option>
-                <option>Завідувач кафедри</option>
-                <option>Професор</option>
-            </select>
+                </select>
 
-            <input class="input_email" type="text">
-            <input class="input_password" type="text">
+                <select class="input_academic_degree" name="StupinAdd">
+                    <option hidden selected> </option>
+                    <option>Асистент</option>
+                    <option>Доцент</option>
+                    <option>Завідувач кафедри</option>
+                    <option>Професор</option>
+                </select>
+
+                <input class="input_email" type="text" name="EmailAdd">
+                <input class="input_password" type="text" name="PasswordAdd">
+                <button class="input">Внести дані</button>
+            </form>
         </div>
-        <button class="input">Внести дані</button>
-        <br>
     </div>
 
     <div class="delete_teacher">
@@ -68,31 +66,26 @@
         </div>
 
         <div class="input_inf_del">
+            <form asp-action="DeleteTeacher" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All"/>
+                <select id="FacultySelectDelete" name="FacultyDelete">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title))
+                    {
+                        <option>@item.Title</option>
+                    }
+                </select>
 
-            <select class="del_faculty" name="Факультет">
-                <option hidden selected> -- Виберіть факультет -- </option>
-                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
-                {
-                    <option>@item.Title</option>
-                }
-            </select>
+                <select id="DepartmentSelectDelete" name="DepartmentDelete">
 
-            <select class="del_kafedra" name="Кафедра">
-                <option hidden selected> -- Виберіть кафедру -- </option>
-                @foreach (var item in db.Departments.OrderBy(x => x.Title))
-                {
-                    <option>@item.Title</option>
-                }
-            </select>
-            <select class="del_teach" name="Викладач">
-                <option hidden selected> -- Виберіть викладача -- </option>
-                @foreach (var item in db.Teachers.OrderBy(x => x.LastName))
-                {
-                    <option>@item.LastName @item.FirstName @item.MiddleName</option>
-                }
-            </select>
+                </select>
+
+                <select id="fullNameSelect" name="TeacherIdDelete">
+
+                </select>
+
+                <button class="delete" type="submit">Видалити дані</button>
+            </form>
         </div>
-        <button class="delete">Видалити дані</button>
-        <br>
     </div>
 </div>
