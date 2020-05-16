@@ -1,14 +1,10 @@
-﻿
-@{
-    Layout = null;
-}
+﻿<!DOCTYPE html>
 
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Admin</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>@RenderSection("Title")</title>
     <link rel="stylesheet" type="text/css" href="~/css/admin.css">
-    <meta charset="utf-8">
 </head>
 <body>
     <div class="Menu">
@@ -16,8 +12,12 @@
         <button class="Admin">Адміністратор</button>
         <button class="Teacher" onclick="location.href='@Url.Action("Teacher", "Admin")'">Викладач</button>
         <button class="Stud" onclick="location.href='@Url.Action("Student", "Admin")'">Студент</button>
-        <button class="Groupe" onclick="location.href='@Url.Action("Student", "Admin")'">Академічні групи</button>
-        <button class="Exit">Вихід</button>
+        <button class="Groupe" onclick="location.href='@Url.Action("AcGroup", "Admin")'">Академічні групи</button>
+        <button class="Exit" onclick="location.href='@Url.Action("Exit", "Admin")'">Вихід</button>
+
     </div>
+    @RenderBody()
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>

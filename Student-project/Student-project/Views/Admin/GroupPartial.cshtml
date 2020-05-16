@@ -1,0 +1,6 @@
+﻿@model List<Student_project.Model.Groups>; 
+
+@foreach (var group in Model.OrderBy(x=>x.GroupName))
+{
+    <option value="@group.GroupName">@group.GroupName</option>
+}

@@ -62,6 +62,22 @@
     <Compile Include="Migrations\202005070042311_Second-Migration.designer.cs">
       <DependentUpon>202005070042311_Second-Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005131755204_d.cs" />
+    <Compile Include="Migrations\202005131755204_d.designer.cs">
+      <DependentUpon>202005131755204_d.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005131759251_Fourth Migration.cs" />
+    <Compile Include="Migrations\202005131759251_Fourth Migration.designer.cs">
+      <DependentUpon>202005131759251_Fourth Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005131801245_Fifth Migration.cs" />
+    <Compile Include="Migrations\202005131801245_Fifth Migration.designer.cs">
+      <DependentUpon>202005131801245_Fifth Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005161935223_Sixth Migration.cs" />
+    <Compile Include="Migrations\202005161935223_Sixth Migration.designer.cs">
+      <DependentUpon>202005161935223_Sixth Migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +97,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005070042311_Second-Migration.resx">
       <DependentUpon>202005070042311_Second-Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005131755204_d.resx">
+      <DependentUpon>202005131755204_d.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005131759251_Fourth Migration.resx">
+      <DependentUpon>202005131759251_Fourth Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005131801245_Fifth Migration.resx">
+      <DependentUpon>202005131801245_Fifth Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005161935223_Sixth Migration.resx">
+      <DependentUpon>202005161935223_Sixth Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

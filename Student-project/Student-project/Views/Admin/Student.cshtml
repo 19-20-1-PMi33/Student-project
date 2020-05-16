@@ -1,0 +1,79 @@
+﻿@model List<Student_project.Model.Students>
+
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@{
+    Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
+}
+
+@section Title {
+    Студенти
+}
+
+<div class="inform">
+
+    <div class="new_student">
+        <br>
+        <h2>Внести студента</h2>
+        <div class="text_inf">
+            <p>ПІБ Студента:  </p>
+            <p>Номер залікової книги:</p>
+            <p>Факультет:  </p>
+            <p>Группа:  </p>
+        </div>
+
+        <div class="input_inf">
+            <form asp-action="AddStudent" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
+                <input class="input_sur" type="text" name="FullNameAdd">
+                <input class="input_num_book" type="text" name="StudentIdAdd">
+
+                <select id="FacultySelectAdd" name="FacultyAdd">
+                    <option hidden selected> </option>
+                    @*<option>---</option>*@
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title).Select(x => x.Title))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+                <select id="GroupSelectAdd" name="GroupAdd">
+                </select>
+
+                <button class="input" type="submit">Внести дані</button>
+            </form>
+        </div>
+        
+    </div>
+
+    <div class="delete_student">
+        <br>
+        <h2>Видалити студента</h2>
+        <div class="text_inf_del">
+            <p>Факультет:  </p>
+            <p>Группа:  </p>
+            <p>ПІБ Студента:  </p>
+        </div>
+
+        <div class="input_inf_del">
+            <form asp-action="DeleteStudent" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All"></div>
+                <select id="FacultySelect" name="FacultyDelete">
+                    <option hidden selected> </option>
+                    @*<option>---</option>*@
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title).Select(x => x.Title))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+
+                <select id="GroupSelect" name="GroupDelete">
+                </select>
+
+                <select id="fullNameSelect" name="StudentIdDelete">
+                </select>
+                <button class="delete">Видалити дані</button>
+            </form>
+        </div>
+    </div>
+</div>

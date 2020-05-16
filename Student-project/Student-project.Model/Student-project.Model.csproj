@@ -63,6 +63,7 @@
     <Compile Include="Admin.cs" />
     <Compile Include="Departments.cs" />
     <Compile Include="Exams.cs" />
+    <Compile Include="Faculties.cs" />
     <Compile Include="Groups.cs" />
     <Compile Include="Marks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

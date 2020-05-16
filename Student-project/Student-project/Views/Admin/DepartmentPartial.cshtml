@@ -1,0 +1,6 @@
+﻿@model List<Student_project.Model.Departments>
+
+@foreach (var department in Model)
+{
+    <option value="@department.Title">@department.Title</option>
+}

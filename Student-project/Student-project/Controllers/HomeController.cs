@@ -11,6 +11,7 @@ using Student_project.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Student_project.Model;
 
 namespace Student_project.Controllers
 {
@@ -36,10 +37,10 @@ namespace Student_project.Controllers
 
             return View(student);
         }
-        public IActionResult Marks()
+        public async Task<IActionResult> Marks()
         {
             string user = User.Identity.Name;
-            var student = db.Students.Find(user);
+            var student = await db.Students.FindAsync(user);
             double groupMark = db.Marks.Where(x => x.Students.Group == student.Group).Sum(x => x.Mark) / db.Marks.Count(x => x.Students.Group == student.Group);
             ViewBag.GroupMark = groupMark;
             var marks = db.Marks.Where(x=>x.StudentId == user)
@@ -51,11 +52,6 @@ namespace Student_project.Controllers
             return View(marks);
         }
 
-        //public IActionResult Exit()
-        //{
-        //    HttpContext.Response.Cookies.Delete("UserId");
-        //    return RedirectToAction("Index", "Login");
-        //}
         public async Task<IActionResult> Exit()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -64,6 +60,14 @@ namespace Student_project.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult AddGroup(string title)
+        {
+            var group = new Groups { GroupName = title, Department = "Дискретного аналізу та інтелектуальних систем" };
+            db.Groups.Add(group);
+            db.SaveChanges();
+            return View("Marks");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

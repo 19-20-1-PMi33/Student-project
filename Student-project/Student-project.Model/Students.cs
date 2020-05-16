@@ -33,9 +33,6 @@ namespace Student_project.Model
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Спеціальність")]
-        public string Specialty { get; set; }
-
         public virtual Groups Groups { get; set; }
     }
 }

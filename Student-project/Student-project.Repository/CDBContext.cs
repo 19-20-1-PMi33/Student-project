@@ -14,6 +14,7 @@ namespace Student_project.Repository
         {
             
         }
+        public DbSet<Faculties> Faculties { get; set; }
         public DbSet<Students> Students { get; set; }
         public DbSet<Departments> Departments { get; set; }
         public DbSet<Exams> Exams { get; set; }

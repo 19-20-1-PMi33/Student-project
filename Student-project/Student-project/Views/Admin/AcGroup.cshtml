@@ -1,0 +1,108 @@
+﻿@model List<Student_project.Model.Exams>
+
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@{
+    Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
+}
+@section Title {
+    Академічні группи
+}
+
+<div class="inform">
+
+    <div class="new_groupe">
+        <br>
+        <h2>Зміни навчального плану:</h2>
+        <div class="text_inf">
+            <p>Факультет:  </p>
+            <p>Кафедра:  </p>
+            <p>Викладач: </p>
+            <p>Предмет:  </p>
+            <p>Група:  </p>
+            <p>Рік:  </p>
+        </div>
+
+        <div class="input_inf">
+            <form asp-action="AddGroup" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
+                <select id="FacultySelectAdd" name="FacultyAdd">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title))
+                    {
+                        <option>@item.Title</option>
+                    }
+                </select>
+
+                <select id="DepartmentSelectAdd" name="DepartmentAdd">
+                </select>
+
+                <select id="fullNameSelectAdd" name="TeacherIdAdd">
+                </select>
+
+                <select class="input_subject" name="SubjectAdd">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Subjects.OrderBy(x => x.Title))
+                    {
+                        <option>@item.Title</option>
+                    }
+                </select>
+
+                <select id="GroupSelectAdd" name="GroupAdd">
+                </select>
+
+                <input type="text" name="YearAdd">
+                <button class="input" type="submit">Внести дані</button>
+                <br>
+            </form>
+        </div>
+    </div>
+
+    <div class="delete_groupe">
+        <br>
+        <h2>Видалити предмет з навчального плану: </h2>
+        <div class="text_inf_del">
+            <p>Факультет:  </p>
+            <p>Кафедра:  </p>
+            <p>Викладач: </p>
+            <p>Предмет:  </p>
+            <p>Група:  </p>
+            <p>Рік:  </p>
+        </div>
+
+        <div class="input_inf_del">
+            <form asp-action="DeleteGroup" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
+                <select id="FacultySelectDelete" name="FacultyDelete">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title))
+                    {
+                        <option>@item.Title</option>
+                    }
+                </select>
+
+                <select id="DepartmentSelectDelete" name="DepartmentDelete">
+                </select>
+
+                <select id="fullNameSelect" name="TeacherIdDelete">
+                </select>
+
+                <select class="input_subject" name="SubjectDelete">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Subjects.OrderBy(x => x.Title))
+                    {
+                        <option>@item.Title</option>
+                    }
+                </select>
+
+                <select id="GroupSelectDelete" name="GroupDelete">
+                </select>
+
+                <input type="text" name="YearDelete">
+
+                <button class="delete" type="submit">Видалити дані</button>
+            </form>
+        </div>
+    </div>
+</div>

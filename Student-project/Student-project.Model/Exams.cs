@@ -18,7 +18,7 @@ namespace Student_project.Model
         public int Teacher { get; set; }
         [ForeignKey("Groups")]
         public string GroupName { get; set; }
-
+        public int Year { get; set; }
         public virtual Subjects Subjects { get; set; }
         public virtual Teachers Teachers { get; set; }
         public virtual Groups Groups { get; set; }

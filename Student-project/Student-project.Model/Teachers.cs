@@ -18,7 +18,8 @@ namespace Student_project.Model
         [ForeignKey("Departments")]
         public string Department { get; set; }
         public string Type { get; set; }
-
+        public string Email { get; set; }
+        public string Password { get; set; }
         public virtual Departments Departments { get; set; }
     }
 }

@@ -1,0 +1,89 @@
+﻿@model List<Student_project.Model.Teachers>;
+
+@{
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@{
+    Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
+}
+@section Title {
+    Викладачи
+}
+
+<div class="inform">
+
+    <div class="new_teacher">
+        <br>
+        <h2>Внести викладача</h2>
+        <div class="text_inf">
+            <p>ПІБ Викладача:  </p>
+            <p>Факультет:  </p>
+            <p>Кафедра: </p>
+            <p>Вчена ступінь:  </p>
+            <p>Електронна пошта:  </p>
+        </div>
+
+        <div class="input_inf">
+            <form asp-action="AddTeacher" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All"></div>
+                <input class="input_sur" type="text" name="FullNameAdd">
+
+                <select id="FacultySelectAdd1" name="FacultyAdd">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title).Select(x=>x.Title))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+
+                <select id="DepartmentSelect" name="DepartmentAdd">
+
+                </select>
+
+                <select class="input_academic_degree" name="StupinAdd">
+                    <option hidden selected> </option>
+                    <option>Асистент</option>
+                    <option>Доцент</option>
+                    <option>Завідувач кафедри</option>
+                    <option>Професор</option>
+                </select>
+
+                <input class="input_email" type="text" name="EmailAdd">
+                <button class="input">Внести дані</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="delete_teacher">
+        <br>
+        <h2>Видалити викладача</h2>
+        <div class="text_inf_del">
+            <p>Факультет:  </p>
+            <p>Кафедра:  </p>
+            <p>ПІБ Викладача:  </p>
+        </div>
+
+        <div class="input_inf_del">
+            <form asp-action="DeleteTeacher" asp-controller="Admin" asp-antiforgery="true" method="post">
+                <div asp-validation-summary="All"/>
+                <select id="FacultySelectDelete" name="FacultyDelete">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Faculties.OrderBy(x => x.Title))
+                    {
+                        <option>@item.Title</option>
+                    }
+                </select>
+
+                <select id="DepartmentSelectDelete" name="DepartmentDelete">
+
+                </select>
+
+                <select id="fullNameSelect" name="TeacherIdDelete">
+
+                </select>
+
+                <button class="delete" type="submit">Видалити дані</button>
+            </form>
+        </div>
+    </div>
+</div>
