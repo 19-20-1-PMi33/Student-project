@@ -91,7 +91,6 @@ namespace Student_project.Controllers
             var fullname = Request.Form["FullNameAdd"].ToString();
             var studentId = Request.Form["StudentIdAdd"].ToString();
             var group = Request.Form["GroupAdd"].ToString();
-            var spec = Request.Form["SpecAdd"].ToString();
             var fullnamesplit = fullname.Trim().Replace("  ", " ").Split(" ");
             var student = new Students
             {
@@ -100,7 +99,6 @@ namespace Student_project.Controllers
                 MiddleName = fullnamesplit[2],
                 ID = studentId,
                 Group = group,
-                Specialty = spec,
                 Password = studentId
             };
             db.Students.Add(student);
@@ -146,7 +144,6 @@ namespace Student_project.Controllers
             var department = Request.Form["DepartmentAdd"].ToString();
             var stupin = Request.Form["StupinAdd"].ToString();
             var email = Request.Form["EmailAdd"].ToString();
-            var password = Request.Form["PasswordAdd"].ToString();
             var fullnamesplit = fullname.Trim().Replace("  ", " ").Split(" ");
 
             var teacher = new Teachers
@@ -156,7 +153,8 @@ namespace Student_project.Controllers
                 MiddleName = fullnamesplit[2],
                 Department = department,
                 Email = email,
-                Type = stupin
+                Type = stupin,
+                Password = email
             };
             db.Teachers.Add(teacher);
             db.SaveChanges();
