@@ -46,7 +46,7 @@ button {
 .new_student {
     margin-left: auto;
     width: 800px;
-    height: 400px;
+    height: 300px;
     border-radius: 10px;
     background: #c3d2d7;
 }
@@ -206,7 +206,7 @@ h2 {
 .new_groupe {
     margin-left: auto;
     width: 800px;
-    height: 330px;
+    height: 370px;
     border-radius: 10px;
     background: #c3d2d7;
 }

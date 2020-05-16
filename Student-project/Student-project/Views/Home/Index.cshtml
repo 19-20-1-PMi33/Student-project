@@ -2,6 +2,8 @@
 
 @{
     Layout = "~/Views/Home/_Layout.cshtml";
+    Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
+    var avgmark = db.Marks.Where(x => x.StudentId == Model.ID).Sum(x=>x.Mark) / db.Marks.Count();
 }
 
 @section Name {
@@ -17,7 +19,7 @@
     <p>Львівський національний університет імені Івана Франка</p>
     <p>Факультет <strong>@Model.Groups.Departments.Faculty</strong></p>
     <p>Кафедра <strong>@Model.Groups.Department</strong></p>
-    <p>Спеціальність <strong>@Model.Specialty</strong></p>
     <p>Группа <strong>@Model.Group</strong></p>
+    <p>Середній бал <strong>@avgmark</strong></p>
     <br>
 </div>
