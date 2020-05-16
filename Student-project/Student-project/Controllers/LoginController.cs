@@ -43,6 +43,13 @@ namespace Student_project.Controllers
 
                     return RedirectToAction("Index", "Admin");
                 }
+                Teachers teacher = await db.Teachers.FirstOrDefaultAsync(u => u.Email == user.Login && u.Password == user.Password);
+                if (teacher != null)
+                {
+                    await Authenticate(user.Login, "Teacher");
+
+                    return RedirectToAction("Index", "Teacher");
+                }
                 ModelState.AddModelError("", "Невірний логін чи пароль");
             }
             return View("Index");
