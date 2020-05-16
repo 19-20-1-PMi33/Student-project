@@ -78,7 +78,7 @@ namespace Student_project.Controllers
 
                 return PartialView("StudentPartial", model);
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 _logger.LogError(ex.Message);
 
@@ -104,13 +104,13 @@ namespace Student_project.Controllers
             db.Students.Add(student);
             db.SaveChanges();
 
-            return View("Student",db.Students.ToList());
+            return View("Student", db.Students.ToList());
         }
         [HttpPost]
         public IActionResult DeleteStudent()
         {
             var studentId = Request.Form["StudentIdDelete"].ToString();
-            foreach (var item in db.Marks.Where(x=>x.Students.ID == studentId))
+            foreach (var item in db.Marks.Where(x => x.Students.ID == studentId))
             {
                 db.Marks.Remove(item);
             }
@@ -181,7 +181,7 @@ namespace Student_project.Controllers
         public IActionResult DeleteTeacher()
         {
             var teachersId = Convert.ToInt32(Request.Form["TeacherIdDelete"].ToString());
-            foreach (var item in db.Marks.Where(x=>x.Exams.Teacher == teachersId))
+            foreach (var item in db.Marks.Where(x => x.Exams.Teacher == teachersId))
             {
                 db.Marks.Remove(item);
             }
@@ -194,6 +194,49 @@ namespace Student_project.Controllers
             db.SaveChanges();
 
             return View("Teacher", db.Teachers.ToList());
+        }
+
+        [HttpPost]
+        public IActionResult AddGroup()
+        {
+
+            var teacherId = Convert.ToInt32(Request.Form["TeacherIdAdd"].ToString());
+            var group = Request.Form["GroupAdd"].ToString();
+            var year = Convert.ToInt32(Request.Form["YearAdd"].ToString());
+            var subject = Request.Form["SubjectAdd"].ToString();
+
+            var acgroup = new Exams
+            {
+                Teacher = teacherId,
+                GroupName = group,
+                Year = year,
+                Subject = subject,
+            };
+            db.Exams.Add(acgroup);
+            db.SaveChanges();
+
+            return View("AcGroup", db.Exams.ToList());
+        }
+        [HttpPost]
+        public IActionResult DeleteGroup()
+        {
+
+            var teacherId = Convert.ToInt32(Request.Form["TeacherIdDelete"].ToString());
+            var group = Request.Form["GroupDelete"].ToString();
+            var year = Convert.ToInt32(Request.Form["YearDelete"].ToString());
+            var subject = Request.Form["SubjectDelete"].ToString();
+
+            var acgroup = db.Exams.Where(x => x.GroupName == group && x.Subject == subject && x.Teacher == teacherId && x.Year == year).First();
+
+            foreach (var item in db.Marks.Where(x=>x.Exam == acgroup.Key))
+            {
+                db.Marks.Remove(item);
+            }
+
+            db.Exams.Remove(acgroup);
+            db.SaveChanges();
+
+            return View("AcGroup", db.Exams.ToList());
         }
     }
 }

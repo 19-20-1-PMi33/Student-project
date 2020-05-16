@@ -83,6 +83,7 @@ var getDepartmentsByFacultyAdd = function (faculty) {
 $("#FacultySelectDelete").change(function () {
     let faculty = document.getElementById("FacultySelectDelete").value;
     getDepartmentsByFacultyDelete(faculty);
+    getGroupsByFacultyAdd1(faculty);
     $("select[id=fullNameSelect]").html("");
 });
 
@@ -111,6 +112,70 @@ var getTeacherByDepartmentDelete = function (department) {
         data: 'department=' + department,
         success: function (data) {
             $("select[id=fullNameSelect]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+var getGroupsByFacultyAdd1 = function (faculty) {
+    $.ajax({
+        type: "GET",
+        url: "/Admin/GetGroupsByFaculty",
+        data: 'faculty=' + faculty,
+        success: function (data) {
+            $("select[id=GroupSelectDelete]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+$("#FacultySelectAdd").change(function () {
+    let faculty = document.getElementById("FacultySelectAdd").value;
+    getDepartmentsByFacultyDelete1(faculty);
+    getGroupsByFacultyAdd2(faculty);
+    $("select[id=fullNameSelectAdd]").html("");
+});
+
+$("#DepartmentSelectAdd").change(function () {
+    let department = document.getElementById("DepartmentSelectAdd").value;
+    getTeacherByDepartmentDelete1(department);
+});
+
+var getDepartmentsByFacultyDelete1 = function (faculty) {
+    $.ajax({
+        type: "GET",
+        url: "/Admin/GetDepartmentsByFaculty",
+        data: 'faculty=' + faculty,
+        success: function (data) {
+            $("select[id=DepartmentSelectAdd]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+var getTeacherByDepartmentDelete1 = function (department) {
+    $.ajax({
+        type: "GET",
+        url: "/Admin/GetTeachersByDepartment",
+        data: 'department=' + department,
+        success: function (data) {
+            $("select[id=fullNameSelectAdd]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+var getGroupsByFacultyAdd2 = function (faculty) {
+    $.ajax({
+        type: "GET",
+        url: "/Admin/GetGroupsByFaculty",
+        data: 'faculty=' + faculty,
+        success: function (data) {
+            $("select[id=GroupSelectAdd]").html(data);
         },
         error: function (data) {
             console.log(data);
