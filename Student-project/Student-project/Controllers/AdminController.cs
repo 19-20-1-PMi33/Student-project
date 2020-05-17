@@ -30,31 +30,15 @@ namespace Student_project.Controllers
         }
         public IActionResult Student()
         {
-            var students = db.Students
-                .Include(x => x.Groups)
-                .Include(x => x.Groups.Departments)
-                .Include(x => x.Groups.Departments.Faculties)
-                .ToList();
-            return View(students);
+            return View();
         }
         public IActionResult Teacher()
         {
-            var teachers = db.Teachers
-                .Include(x => x.Departments)
-                .Include(x => x.Departments.Faculties)
-                .ToList();
-            return View(teachers);
+            return View();
         }
         public IActionResult AcGroup()
         {
-            var exams = db.Exams
-                .Include(x => x.Groups)
-                .Include(x => x.Teachers)
-                .Include(x => x.Groups.Departments)
-                .Include(x => x.Groups.Departments.Faculties)
-                .Include(x => x.Subjects)
-                .ToList();
-            return View(exams);
+            return View();
         }
         public async Task<IActionResult> Exit()
         {
@@ -65,9 +49,18 @@ namespace Student_project.Controllers
         [HttpGet]
         public IActionResult GetGroupsByFaculty(string faculty)
         {
-            var model = db.Groups.Where(x => x.Departments.Faculty == faculty).ToList();
+            try
+            {
+                var model = db.Groups.Where(x => x.Departments.Faculty == faculty).ToList();
 
-            return PartialView("GroupPartial", model);
+                return PartialView("GroupPartial", model);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return PartialView("GroupPartial", db.Groups.ToList());
+            }
         }
         [HttpGet]
         public IActionResult GetStudentsByGroup(string group)
@@ -88,36 +81,68 @@ namespace Student_project.Controllers
         [HttpPost]
         public IActionResult AddStudent()
         {
-            var fullname = Request.Form["FullNameAdd"].ToString();
-            var studentId = Request.Form["StudentIdAdd"].ToString();
-            var group = Request.Form["GroupAdd"].ToString();
-            var fullnamesplit = fullname.Trim().Replace("  ", " ").Split(" ");
-            var student = new Students
+            if (ModelState.IsValid)
             {
-                LastName = fullnamesplit[0],
-                FirstName = fullnamesplit[1],
-                MiddleName = fullnamesplit[2],
-                ID = studentId,
-                Group = group,
-                Password = studentId
-            };
-            db.Students.Add(student);
-            db.SaveChanges();
+                try
+                {
+                    var fullname = Request.Form["FullNameAdd"].ToString();
+                    var studentId = Request.Form["StudentIdAdd"].ToString();
+                    var group = Request.Form["GroupAdd"].ToString();
+                    var fullnamesplit = fullname.Trim().Replace("  ", " ").Split(" ");
+                    if (db.Students.Find(studentId) != null)
+                    {
+                        return UnprocessableEntity();
+                    }
+                    else
+                    {
+                        var student = new Students
+                        {
+                            LastName = fullnamesplit[0],
+                            FirstName = fullnamesplit[1],
+                            MiddleName = fullnamesplit[2],
+                            ID = studentId,
+                            Group = group,
+                            Password = studentId
+                        };
+                        db.Students.Add(student);
+                        db.SaveChanges();
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    _logger.LogError(ex.Message);
+                }
+            }
 
-            return View("Student", db.Students.ToList());
+            return NoContent();
         }
         [HttpPost]
         public IActionResult DeleteStudent()
         {
             var studentId = Request.Form["StudentIdDelete"].ToString();
-            foreach (var item in db.Marks.Where(x => x.Students.ID == studentId))
+            if (studentId == string.Empty)
             {
-                db.Marks.Remove(item);
+                return UnprocessableEntity();
             }
-            var student = db.Students.Find(studentId);
-            db.Students.Remove(student);
-            db.SaveChanges();
-            return View("Student", db.Students.ToList());
+            else if (ModelState.IsValid)
+            {
+                try
+                {
+                    foreach (var item in db.Marks.Where(x => x.Students.ID == studentId))
+                    {
+                        db.Marks.Remove(item);
+                    }
+                    var student = db.Students.Find(studentId);
+                    db.Students.Remove(student);
+                    db.SaveChanges();
+                }
+                catch (ArgumentException ex)
+                {
+                    _logger.LogError(ex.Message);
+                }
+            }
+
+            return NoContent();
         }
 
         [HttpGet]
@@ -140,25 +165,36 @@ namespace Student_project.Controllers
         [HttpPost]
         public IActionResult AddTeacher()
         {
-            var fullname = Request.Form["FullNameAdd"].ToString();
-            var department = Request.Form["DepartmentAdd"].ToString();
-            var stupin = Request.Form["StupinAdd"].ToString();
-            var email = Request.Form["EmailAdd"].ToString();
-            var fullnamesplit = fullname.Trim().Replace("  ", " ").Split(" ");
-
-            var teacher = new Teachers
+            if (ModelState.IsValid)
             {
-                LastName = fullnamesplit[0],
-                FirstName = fullnamesplit[1],
-                MiddleName = fullnamesplit[2],
-                Department = department,
-                Email = email,
-                Type = stupin,
-                Password = email
-            };
-            db.Teachers.Add(teacher);
-            db.SaveChanges();
-            return View("Teacher", db.Teachers.ToList());
+                try
+                {
+                    var fullname = Request.Form["FullNameAdd"].ToString();
+                    var department = Request.Form["DepartmentAdd"].ToString();
+                    var stupin = Request.Form["StupinAdd"].ToString();
+                    var email = Request.Form["EmailAdd"].ToString();
+                    var fullnamesplit = fullname.Trim().Replace("  ", " ").Split(" ");
+
+                    var teacher = new Teachers
+                    {
+                        LastName = fullnamesplit[0],
+                        FirstName = fullnamesplit[1],
+                        MiddleName = fullnamesplit[2],
+                        Department = department,
+                        Email = email,
+                        Type = stupin,
+                        Password = email
+                    };
+                    db.Teachers.Add(teacher);
+                    db.SaveChanges();
+                }
+                catch (ArgumentException ex)
+                {
+                    _logger.LogError(ex.Message);
+                }
+            }
+
+            return NoContent();
         }
         [HttpGet]
         public IActionResult GetTeachersByDepartment(string department)
@@ -180,63 +216,97 @@ namespace Student_project.Controllers
         [HttpPost]
         public IActionResult DeleteTeacher()
         {
-            var teachersId = Convert.ToInt32(Request.Form["TeacherIdDelete"].ToString());
-            foreach (var item in db.Marks.Where(x => x.Exams.Teacher == teachersId))
+            if (ModelState.IsValid)
             {
-                db.Marks.Remove(item);
+                try
+                {
+                    var tcr = Request.Form["TeacherIdDelete"].ToString();
+                    var teachersId = Convert.ToInt32(tcr);
+                    foreach (var item in db.Marks.Where(x => x.Exams.Teacher == teachersId))
+                    {
+                        db.Marks.Remove(item);
+                    }
+                    foreach (var item in db.Exams.Where(x => x.Teacher == teachersId))
+                    {
+                        db.Exams.Remove(item);
+                    }
+                    var teacher = db.Teachers.Find(teachersId);
+                    db.Teachers.Remove(teacher);
+                    db.SaveChanges();
+                }
+                catch (ArgumentException ex)
+                {
+                    _logger.LogError(ex.Message);
+                }
             }
-            foreach (var item in db.Exams.Where(x => x.Teacher == teachersId))
-            {
-                db.Exams.Remove(item);
-            }
-            var teacher = db.Teachers.Find(teachersId);
-            db.Teachers.Remove(teacher);
-            db.SaveChanges();
-
-            return View("Teacher", db.Teachers.ToList());
+            return NoContent();
         }
 
         [HttpPost]
         public IActionResult AddGroup()
         {
-
-            var teacherId = Convert.ToInt32(Request.Form["TeacherIdAdd"].ToString());
-            var group = Request.Form["GroupAdd"].ToString();
-            var year = Convert.ToInt32(Request.Form["YearAdd"].ToString());
-            var subject = Request.Form["SubjectAdd"].ToString();
-
-            var acgroup = new Exams
+            if (ModelState.IsValid)
             {
-                Teacher = teacherId,
-                GroupName = group,
-                Year = year,
-                Subject = subject,
-            };
-            db.Exams.Add(acgroup);
-            db.SaveChanges();
-
-            return View("AcGroup", db.Exams.ToList());
+                try
+                {
+                    var teacherId = Convert.ToInt32(Request.Form["TeacherIdAdd"].ToString());
+                    var group = Request.Form["GroupAdd"].ToString();
+                    var year = Convert.ToInt32(Request.Form["YearAdd"].ToString());
+                    var subject = Request.Form["SubjectAdd"].ToString();
+                    if (db.Exams.Where(x => x.Teacher == teacherId && x.GroupName == group && x.Year == year && x.Subject == subject).Count() == 1)
+                    {
+                        return UnprocessableEntity();
+                    }
+                    else
+                    {
+                        var acgroup = new Exams
+                        {
+                            Teacher = teacherId,
+                            GroupName = group,
+                            Year = year,
+                            Subject = subject,
+                        };
+                        db.Exams.Add(acgroup);
+                        db.SaveChanges();
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    _logger.LogError(ex.Message);
+                }
+            }
+            return NoContent();
         }
         [HttpPost]
         public IActionResult DeleteGroup()
         {
-
-            var teacherId = Convert.ToInt32(Request.Form["TeacherIdDelete"].ToString());
-            var group = Request.Form["GroupDelete"].ToString();
-            var year = Convert.ToInt32(Request.Form["YearDelete"].ToString());
-            var subject = Request.Form["SubjectDelete"].ToString();
-
-            var acgroup = db.Exams.Where(x => x.GroupName == group && x.Subject == subject && x.Teacher == teacherId && x.Year == year).First();
-
-            foreach (var item in db.Marks.Where(x=>x.Exam == acgroup.Key))
+            if (ModelState.IsValid)
             {
-                db.Marks.Remove(item);
+                try
+                {
+                    var tch = Request.Form["TeacherIdDelete"].ToString();
+                    var teacherId = Convert.ToInt32(tch);
+                    var group = Request.Form["GroupDelete"].ToString();
+                    var year = Convert.ToInt32(Request.Form["YearDelete"].ToString());
+                    var subject = Request.Form["SubjectDelete"].ToString();
+
+                    var acgroup = db.Exams.Where(x => x.GroupName == group && x.Subject == subject && x.Teacher == teacherId && x.Year == year).First();
+
+                    foreach (var item in db.Marks.Where(x=>x.Exam == acgroup.Key))
+                    {
+                        db.Marks.Remove(item);
+                    }
+
+                    db.Exams.Remove(acgroup);
+                    db.SaveChanges();
+
+                }
+                catch (ArgumentException ex)
+                {
+                    _logger.LogError(ex.Message);
+                }
             }
-
-            db.Exams.Remove(acgroup);
-            db.SaveChanges();
-
-            return View("AcGroup", db.Exams.ToList());
+            return NoContent();
         }
     }
 }

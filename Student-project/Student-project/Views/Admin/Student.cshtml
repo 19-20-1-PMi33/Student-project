@@ -1,6 +1,4 @@
-﻿@model List<Student_project.Model.Students>
-
-@{
+﻿@{
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 @{
@@ -23,8 +21,8 @@
             <p>Группа:  </p>
         </div>
 
-        <div class="input_inf">
-            <form asp-action="AddStudent" asp-controller="Admin" asp-antiforgery="true" method="post">
+        <div class="text_inf">
+            <form asp-action="AddStudent" asp-controller="Admin" asp-antiforgery="true" method="post" id="add-student-form">
                 <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
                 <input class="input_sur" type="text" name="FullNameAdd">
                 <input class="input_num_book" type="text" name="StudentIdAdd">
@@ -43,20 +41,20 @@
                 <button class="input" type="submit">Внести дані</button>
             </form>
         </div>
-        
+
     </div>
 
     <div class="delete_student">
         <br>
         <h2>Видалити студента</h2>
-        <div class="text_inf_del">
+        <div class="text_inf">
             <p>Факультет:  </p>
             <p>Группа:  </p>
             <p>ПІБ Студента:  </p>
         </div>
 
-        <div class="input_inf_del">
-            <form asp-action="DeleteStudent" asp-controller="Admin" asp-antiforgery="true" method="post">
+        <div class="text_inf">
+            <form asp-action="DeleteStudent" asp-controller="Admin" asp-antiforgery="true" method="post" id="delete-student-form">
                 <div asp-validation-summary="All"></div>
                 <select id="FacultySelect" name="FacultyDelete">
                     <option hidden selected> </option>
@@ -72,7 +70,7 @@
 
                 <select id="fullNameSelect" name="StudentIdDelete">
                 </select>
-                <button class="delete">Видалити дані</button>
+                <button class="delete" type="submit">Видалити дані</button>
             </form>
         </div>
     </div>

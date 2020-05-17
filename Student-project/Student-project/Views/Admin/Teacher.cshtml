@@ -1,6 +1,4 @@
-﻿@model List<Student_project.Model.Teachers>;
-
-@{
+﻿@{
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 @{
@@ -23,10 +21,10 @@
             <p>Електронна пошта:  </p>
         </div>
 
-        <div class="input_inf">
-            <form asp-action="AddTeacher" asp-controller="Admin" asp-antiforgery="true" method="post">
+        <div class="text_inf">
+            <form asp-action="AddTeacher" asp-controller="Admin" asp-antiforgery="true" method="post" id="add-teacher-form">
                 <div asp-validation-summary="All"></div>
-                <input class="input_sur" type="text" name="FullNameAdd">
+                <input type="text" name="FullNameAdd">
 
                 <select id="FacultySelectAdd1" name="FacultyAdd">
                     <option hidden selected> </option>
@@ -49,7 +47,7 @@
                 </select>
 
                 <input class="input_email" type="text" name="EmailAdd">
-                <button class="input">Внести дані</button>
+                <button class="input" type="submit" id="add-teacher-btn">Внести дані</button>
             </form>
         </div>
     </div>
@@ -57,20 +55,20 @@
     <div class="delete_teacher">
         <br>
         <h2>Видалити викладача</h2>
-        <div class="text_inf_del">
+        <div class="text_inf">
             <p>Факультет:  </p>
             <p>Кафедра:  </p>
             <p>ПІБ Викладача:  </p>
         </div>
 
-        <div class="input_inf_del">
-            <form asp-action="DeleteTeacher" asp-controller="Admin" asp-antiforgery="true" method="post">
+        <div class="input_inf">
+            <form asp-action="DeleteTeacher" asp-controller="Admin" asp-antiforgery="true" method="post" id="delete-teacher-form">
                 <div asp-validation-summary="All"/>
                 <select id="FacultySelectDelete" name="FacultyDelete">
                     <option hidden selected> </option>
                     @foreach (var item in db.Faculties.OrderBy(x => x.Title))
                     {
-                        <option>@item.Title</option>
+                        <option value="@item.Title">@item.Title</option>
                     }
                 </select>
 
@@ -78,11 +76,11 @@
 
                 </select>
 
-                <select id="fullNameSelect" name="TeacherIdDelete">
+                <select id="fullTeacherNameSelect" name="TeacherIdDelete">
 
                 </select>
 
-                <button class="delete" type="submit">Видалити дані</button>
+                <button class="delete" type="submit" id="delete-teacher-btn">Видалити дані</button>
             </form>
         </div>
     </div>

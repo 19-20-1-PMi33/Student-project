@@ -182,3 +182,95 @@ var getGroupsByFacultyAdd2 = function (faculty) {
         }
     });
 };
+$("#add-student-form").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/Admin/AddStudent",
+        data: $("#add-student-form").serialize(),
+        success: function () {
+            toastr.success('Студент доданий успішно.', 'Успіх', { timeOut: 3000 });
+        },
+        error: function (data) {
+            if (data.status === 422) {
+                toastr.error('Студент вже існує з таким номером заліковки', 'Помилка', { timeOut: 3000 });
+            } else {
+            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+            }
+        }
+    });
+});
+$("#delete-student-form").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/Admin/DeleteStudent",
+        data: $("#delete-student-form").serialize(),
+        success: function () {
+            toastr.success('Студент видалиний успішно.', 'Успіх', { timeOut: 3000 });
+        },
+        error: function () {
+            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+        }
+    });
+});
+$("#add-teacher-form").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/Admin/AddTeacher",
+        data: $("#add-teacher-form").serialize(),
+        success: function () {
+            toastr.success('Викладач доданий успішно.', 'Успіх', { timeOut: 3000 });
+        },
+        error: function () {
+            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+        }
+    });
+});
+$("#delete-teacher-form").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/Admin/DeleteTeacher",
+        data: $("#delete-teacher-form").serialize(),
+        success: function () {
+            toastr.success('Викладач видалиний успішно.', 'Успіх', { timeOut: 3000 });
+        },
+        error: function () {
+            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+        }
+    });
+});
+$("#add-group-form").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/Admin/AddGroup",
+        data: $("#add-group-form").serialize(),
+        success: function () {
+            toastr.success('Академічна група додана успішно.', 'Успіх', { timeOut: 3000 });
+        },
+        error: function (data) {
+            if (data.status === 422) {
+                toastr.error('Вже існує така академічна група', 'Помилка', { timeOut: 3000 });
+            } else {
+                toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+            }
+        }
+    });
+});
+$("#delete-group-form").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/Admin/DeleteGroup",
+        data: $("#delete-group-form").serialize(),
+        success: function () {
+            toastr.success('Академічна група видалина успішно.', 'Успіх', { timeOut: 3000 });
+        },
+        error: function () {
+            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+        }
+    });
+});

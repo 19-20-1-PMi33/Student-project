@@ -1,6 +1,4 @@
-﻿@model List<Student_project.Model.Exams>
-
-@{
+﻿@{
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 @{
@@ -24,9 +22,9 @@
             <p>Рік:  </p>
         </div>
 
-        <div class="input_inf">
-            <form asp-action="AddGroup" asp-controller="Admin" asp-antiforgery="true" method="post">
-                <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
+        <div class="text_inf">
+            <form asp-action="AddGroup" asp-controller="Admin" asp-antiforgery="true" method="post" id="add-group-form">
+                <div asp-validation-summary="All"></div>
                 <select id="FacultySelectAdd" name="FacultyAdd">
                     <option hidden selected> </option>
                     @foreach (var item in db.Faculties.OrderBy(x => x.Title))
@@ -54,7 +52,6 @@
 
                 <input type="text" name="YearAdd">
                 <button class="input" type="submit">Внести дані</button>
-                <br>
             </form>
         </div>
     </div>
@@ -62,7 +59,7 @@
     <div class="delete_groupe">
         <br>
         <h2>Видалити предмет з навчального плану: </h2>
-        <div class="text_inf_del">
+        <div class="text_inf">
             <p>Факультет:  </p>
             <p>Кафедра:  </p>
             <p>Викладач: </p>
@@ -71,9 +68,9 @@
             <p>Рік:  </p>
         </div>
 
-        <div class="input_inf_del">
-            <form asp-action="DeleteGroup" asp-controller="Admin" asp-antiforgery="true" method="post">
-                <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
+        <div class="text_inf">
+            <form asp-action="DeleteGroup" asp-controller="Admin" asp-antiforgery="true" method="post" id="delete-group-form">
+                <div asp-validation-summary="All"></div>
                 <select id="FacultySelectDelete" name="FacultyDelete">
                     <option hidden selected> </option>
                     @foreach (var item in db.Faculties.OrderBy(x => x.Title))

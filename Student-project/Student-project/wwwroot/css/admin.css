@@ -12,6 +12,7 @@ button {
     border: 0;
     margin-top: 30px;
     width: 150px;
+    left:250px;
 }
 
 /*Menu*/
@@ -206,7 +207,7 @@ h2 {
 .new_groupe {
     margin-left: auto;
     width: 800px;
-    height: 370px;
+    height: 420px;
     border-radius: 10px;
     background: #c3d2d7;
 }
@@ -263,7 +264,7 @@ h2 {
     margin-top: 30px;
     margin-left: auto;
     width: 800px;
-    height: 370px;
+    height: 420px;
     border-radius: 10px;
     background: #c3d2d7;
 }
