@@ -87,7 +87,7 @@ h2{
 td {
     vertical-align: top; 
     padding: 20px;
-
+    border-right: 80px dashed #c3d2d7;
    }
 td#leftcol {
     vertical-align: top; 
@@ -125,3 +125,13 @@ background:#c3d2d7;
 	margin-top:0px;
 	background-color: #3e383e;
 } 
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    padding: 10px;
+    height: 300px; 
+}
