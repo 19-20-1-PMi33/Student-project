@@ -8,98 +8,108 @@
     Академічні группи
 }
 
-<div class="inform">
+    <div class="inform">
+        <div class="new_student">
+            <br>
+            <h2>Зміни навчального плану</h2>
+            <div class="text_inf">
+                <div class="row">
+                    <div class="column">
+                        <p></p>
+                        <p>Факультет:</p>
+                        <p>Кафедра:</p>
+                        <p>Викладач:</p>
+                        <p>Предмет:</p>
+                        <p>Група:</p>
+                        <p>Рік:</p>
+                    </div>
+                    <div class="column1">
+                        <form asp-action="AddGroup" asp-controller="Admin" asp-antiforgery="true" method="post" id="add-group-form">
+                            <div asp-validation-summary="All"></div>
+                            <select id="FacultySelectAdd" name="FacultyAdd">
+                                <option hidden selected> </option>
+                                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
+                                {
+                                    <option>@item.Title</option>
+                                }
+                            </select>
 
-    <div class="new_groupe">
-        <br>
-        <h2>Зміни навчального плану:</h2>
-        <div class="text_inf">
-            <p>Факультет:  </p>
-            <p>Кафедра:  </p>
-            <p>Викладач: </p>
-            <p>Предмет:  </p>
-            <p>Група:  </p>
-            <p>Рік:  </p>
+                            <select id="DepartmentSelectAdd" name="DepartmentAdd">
+                            </select>
+
+                            <select id="fullNameSelectAdd" name="TeacherIdAdd">
+                            </select>
+
+                            <select class="input_subject" name="SubjectAdd">
+                                <option hidden selected> </option>
+                                @foreach (var item in db.Subjects.OrderBy(x => x.Title))
+                                {
+                                    <option>@item.Title</option>
+                                }
+                            </select>
+
+                            <select id="GroupSelectAdd" name="GroupAdd">
+                            </select>
+
+                            <input type="text" name="YearAdd">
+                            <button class="input" type="submit">Внести дані</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="delete_groupe">
+            <br>
+            <h2>Внести викладача</h2>
+            <div class="text_inf">
+                <div class="row">
+                    <div class="column">
+                        <p></p>
+                        <p>Факультет:</p>
+                        <p>Кафедра:</p>
+                        <p>Викладач:</p>
+                        <p>Предмет:</p>
+                        <p>Група:</p>
+                        <p>Рік:</p>
+                    </div>
+                    <div class="column1">
+                        <form asp-action="DeleteGroup" asp-controller="Admin" asp-antiforgery="true" method="post" id="delete-group-form">
+                            <div asp-validation-summary="All"></div>
+                            <select id="FacultySelectDelete" name="FacultyDelete">
+                                <option hidden selected> </option>
+                                @foreach (var item in db.Faculties.OrderBy(x => x.Title))
+                                {
+                                    <option>@item.Title</option>
+                                }
+                            </select>
+
+                            <select id="DepartmentSelectDelete" name="DepartmentDelete">
+                            </select>
+
+                            <select id="fullNameSelect" name="TeacherIdDelete">
+                            </select>
+
+                            <select class="input_subject" name="SubjectDelete">
+                                <option hidden selected> </option>
+                                @foreach (var item in db.Subjects.OrderBy(x => x.Title))
+                                {
+                                    <option>@item.Title</option>
+                                }
+                            </select>
+
+                            <select id="GroupSelectDelete" name="GroupDelete">
+                            </select>
+
+                            <input type="text" name="YearDelete">
+
+                            <button class="delete" type="submit">Видалити дані</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
-        <div class="text_inf">
-            <form asp-action="AddGroup" asp-controller="Admin" asp-antiforgery="true" method="post" id="add-group-form">
-                <div asp-validation-summary="All"></div>
-                <select id="FacultySelectAdd" name="FacultyAdd">
-                    <option hidden selected> </option>
-                    @foreach (var item in db.Faculties.OrderBy(x => x.Title))
-                    {
-                        <option>@item.Title</option>
-                    }
-                </select>
-
-                <select id="DepartmentSelectAdd" name="DepartmentAdd">
-                </select>
-
-                <select id="fullNameSelectAdd" name="TeacherIdAdd">
-                </select>
-
-                <select class="input_subject" name="SubjectAdd">
-                    <option hidden selected> </option>
-                    @foreach (var item in db.Subjects.OrderBy(x => x.Title))
-                    {
-                        <option>@item.Title</option>
-                    }
-                </select>
-
-                <select id="GroupSelectAdd" name="GroupAdd">
-                </select>
-
-                <input type="text" name="YearAdd">
-                <button class="input" type="submit">Внести дані</button>
-            </form>
-        </div>
+        
     </div>
-
-    <div class="delete_groupe">
-        <br>
-        <h2>Видалити предмет з навчального плану: </h2>
-        <div class="text_inf">
-            <p>Факультет:  </p>
-            <p>Кафедра:  </p>
-            <p>Викладач: </p>
-            <p>Предмет:  </p>
-            <p>Група:  </p>
-            <p>Рік:  </p>
-        </div>
-
-        <div class="text_inf">
-            <form asp-action="DeleteGroup" asp-controller="Admin" asp-antiforgery="true" method="post" id="delete-group-form">
-                <div asp-validation-summary="All"></div>
-                <select id="FacultySelectDelete" name="FacultyDelete">
-                    <option hidden selected> </option>
-                    @foreach (var item in db.Faculties.OrderBy(x => x.Title))
-                    {
-                        <option>@item.Title</option>
-                    }
-                </select>
-
-                <select id="DepartmentSelectDelete" name="DepartmentDelete">
-                </select>
-
-                <select id="fullNameSelect" name="TeacherIdDelete">
-                </select>
-
-                <select class="input_subject" name="SubjectDelete">
-                    <option hidden selected> </option>
-                    @foreach (var item in db.Subjects.OrderBy(x => x.Title))
-                    {
-                        <option>@item.Title</option>
-                    }
-                </select>
-
-                <select id="GroupSelectDelete" name="GroupDelete">
-                </select>
-
-                <input type="text" name="YearDelete">
-
-                <button class="delete" type="submit">Видалити дані</button>
-            </form>
-        </div>
-    </div>
-</div>

@@ -61,15 +61,6 @@ namespace Student_project.Controllers
         {
             return View();
         }
-
-        public IActionResult AddGroup(string title)
-        {
-            var group = new Groups { GroupName = title, Department = "Дискретного аналізу та інтелектуальних систем" };
-            db.Groups.Add(group);
-            db.SaveChanges();
-            return View("Marks");
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

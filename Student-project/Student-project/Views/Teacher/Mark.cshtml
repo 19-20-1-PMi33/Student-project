@@ -8,49 +8,53 @@
 @section Title {
     Оцінки
 }
-<div class="inform">
+    <div class="inform">
+        <div class="delete_groupe">
+            <br>
+            <h2>Внести викладача</h2>
+            <div class="text_inf">
+                <div class="row">
+                    <div class="column">
+                        <p></p>
+                        <p>Предмет:</p>
+                        <p>Рік:</p>
+                        <p>Група:</p>
+                        <p>Студент:</p>
+                        <p>Оцінка:</p>
+                    </div>
+                    <div class="column1">
+                        <form asp-action="AddMark" asp-controller="Teacher" asp-antiforgery="true" method="post" id="add-mark-form">
+                            <div asp-validation-summary="All"></div>
+                            <select id="TeacherSubject" name="TeacherSubject">
+                                <option hidden selected> </option>
+                                @foreach (var item in db.Exams.Where(x => x.Teacher == teacherID).OrderBy(x => x.Subject).Select(x => x.Subject).Distinct())
+                                {
+                                    <option>@item</option>
+                                }
+                            </select>
 
-    <div class="new_groupe">
-        <br>
-        <h2>Додати нову оцінку:</h2>
-        <div class="text_inf">
-            <p>Предмет:  </p>
-            <p>Рік:  </p>
-            <p>Група: </p>
-            <p>Студент:  </p>
-            <p>Оцінка:  </p>
-        </div>
+                            <select id="TeacherYear" name="TeacherYear">
+                                <option hidden selected> </option>
+                                @foreach (var item in db.Exams.Where(x => x.Teacher == teacherID).OrderBy(x => x.Year).Select(x => x.Year).Distinct())
+                                {
+                                    <option>@item</option>
+                                }
+                            </select>
 
-        <div class="text_inf">
-            <form asp-action="AddMark" asp-controller="Teacher" asp-antiforgery="true" method="post" id="add-mark-form">
-                <div asp-validation-summary="All"></div>
-                <select id="TeacherSubject" name="TeacherSubject">
-                    <option hidden selected> </option>          
-                    @foreach (var item in db.Exams.Where(x=>x.Teacher== teacherID).OrderBy(x => x.Subject).Select(x => x.Subject).Distinct())
-                    {
-                        <option>@item</option>
-                    }
-                </select>
+                            <select id="GroupSelectTeacher" name="GroupSelectTeacher">
+                            </select>
 
-                <select id="TeacherYear" name="TeacherYear">
-                    <option hidden selected> </option>
-                    @foreach (var item in db.Exams.Where(x => x.Teacher == teacherID).OrderBy(x => x.Year).Select(x => x.Year).Distinct())
-                    {
-                        <option>@item</option>
-                    }
-                </select>
+                            <select id="fullNameSelectTeacher" name="fullNameSelectTeacher">
+                            </select>
 
-                <select id="GroupSelectTeacher" name="GroupSelectTeacher">
-                </select>
+                            <input type="text" name="Mark">
 
-                <select id="fullNameSelectTeacher" name="fullNameSelectTeacher">
-                </select>
+                            <button class="input" type="submit">Внести дані</button>
+                        </form>
+                    </div>
 
-                <input type="text" name="Mark">
-
-                <button class="input" type="submit">Внести дані</button>
-            </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 

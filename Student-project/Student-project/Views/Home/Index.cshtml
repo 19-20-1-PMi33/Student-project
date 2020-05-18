@@ -3,7 +3,7 @@
 @{
     Layout = "~/Views/Home/_Layout.cshtml";
     Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
-    var avgmark = db.Marks.Where(x => x.StudentId == Model.ID).Sum(x=>x.Mark) / db.Marks.Count();
+    var avgmark = db.Marks.Where(x => x.StudentId == Model.ID).Sum(x=>x.Mark) / db.Marks.Count(x => x.StudentId == Model.ID);
 }
 
 @section Name {
