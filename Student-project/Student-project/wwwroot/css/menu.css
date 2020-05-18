@@ -17,6 +17,12 @@ button {
     height: 80px;
     float: right;
 }
+.Menu {
+    width: 100%;
+    height: 80px;
+    margin: 0;
+    background: #808080;
+}
 
 .full_name {
     float: left;
@@ -51,8 +57,9 @@ button {
 .Exit {
     float: right;
     font-size: 22px;
-    margin-left: 30px;
+    margin-left: 20px;
     margin-top: 25px;
+    margin-right: 10px;
 }
 /*Drop menu*/
 nav {

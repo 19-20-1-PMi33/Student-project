@@ -1,6 +1,5 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    Layout = "~/Views/Teacher/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -8,9 +7,16 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Сторінка вчителя</title>
+    <link rel="stylesheet" type="text/css" href="~/css/admin.css">
+    <link rel="stylesheet" href="~/lib/toaster/toastr.min.css" />
 </head>
 <body>
-    <p>Teacher</p>
+    <div class="Menu">
+        <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
+        <button class="Admin">Викладач</button>
+        <button class="Teacher">Курси</button>
+        <button class="Exit" onclick="location.href='@Url.Action("Exit", "Teacher")'">Вихід</button>
+    </div>
 </body>
 </html>

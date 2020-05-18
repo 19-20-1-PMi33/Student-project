@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@RenderSection("Title")</title>
+    <link rel="stylesheet" type="text/css" href="~/css/admin.css">
+    <link rel="stylesheet" href="~/lib/toaster/toastr.min.css" />
+</head>
+<body>
+    <div class="Menu">
+        <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
+        <button class="Admin">Адміністратор</button>
+        <button class="Teacher" onclick="location.href='@Url.Action("Teacher", "Admin")'">Викладач</button>
+        <button class="Stud" onclick="location.href='@Url.Action("Student", "Admin")'">Студент</button>
+        <button class="Groupe" onclick="location.href='@Url.Action("AcGroup", "Admin")'">Академічні групи</button>
+        <button class="Exit" onclick="location.href='@Url.Action("Exit", "Admin")'">Вихід</button>
+
+    </div>
+    @RenderBody()
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
+</body>
+</html>
