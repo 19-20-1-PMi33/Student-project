@@ -152,7 +152,7 @@ namespace Student_project.Controllers
         {
             try
             {
-                var model = db.Departments.Where(x => x.Faculties.Title == faculty).ToList();
+                var model = db.Departments.Where(x => x.Faculty == faculty).ToList();
 
                 return PartialView("DepartmentPartial", model);
             }
@@ -176,19 +176,28 @@ namespace Student_project.Controllers
                     var stupin = Request.Form["StupinAdd"].ToString();
                     var email = Request.Form["EmailAdd"].ToString();
                     var fullnamesplit = fullname.Trim().Replace("  ", " ").Split(" ");
-
-                    var teacher = new Teachers
+                    var secname = fullnamesplit[0];
+                    var firname = fullnamesplit[1];
+                    var midname = fullnamesplit[2];
+                    if (db.Teachers.Count(x => x.LastName == secname && x.FirstName == firname && x.MiddleName == midname) == 1)
                     {
-                        LastName = fullnamesplit[0],
-                        FirstName = fullnamesplit[1],
-                        MiddleName = fullnamesplit[2],
-                        Department = department,
-                        Email = email,
-                        Type = stupin,
-                        Password = email
-                    };
-                    db.Teachers.Add(teacher);
-                    db.SaveChanges();
+                        return UnprocessableEntity();
+                    }
+                    else
+                    {
+                        var teacher = new Teachers
+                        {
+                            LastName = secname,
+                            FirstName = firname,
+                            MiddleName = midname,
+                            Department = department,
+                            Email = email,
+                            Type = stupin,
+                            Password = email
+                        };
+                        db.Teachers.Add(teacher);
+                        db.SaveChanges();
+                    }
                 }
                 catch (ArgumentException ex)
                 {

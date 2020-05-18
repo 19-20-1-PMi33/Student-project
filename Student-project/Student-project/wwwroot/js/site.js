@@ -224,8 +224,12 @@ $("#add-teacher-form").submit(function (e) {
         success: function () {
             toastr.success('Викладач доданий успішно.', 'Успіх', { timeOut: 3000 });
         },
-        error: function () {
-            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+        error: function (data) {
+            if (data.status === 422) {
+                toastr.error('Такий викладач вже існує', 'Помилка', { timeOut: 3000 });
+            } else {
+                toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+            }
         }
     });
 });
