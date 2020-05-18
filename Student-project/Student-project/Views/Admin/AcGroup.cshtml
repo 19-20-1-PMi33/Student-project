@@ -51,7 +51,11 @@
                             <select id="GroupSelectAdd" name="GroupAdd">
                             </select>
 
-                            <input type="text" name="YearAdd">
+                            <select id="YearAdd" name="YearAdd">
+                                <option hidden selected> </option>
+                                <option>2020</option>
+                                <option>2021</option>
+                            </select>
                             <button class="input" type="submit">Внести дані</button>
                         </form>
                     </div>
@@ -61,7 +65,7 @@
         </div>
         <div class="delete_groupe">
             <br>
-            <h2>Внести викладача</h2>
+            <h2>Видалити предмет з навчального плану</h2>
             <div class="text_inf">
                 <div class="row">
                     <div class="column">
@@ -101,8 +105,11 @@
                             <select id="GroupSelectDelete" name="GroupDelete">
                             </select>
 
-                            <input type="text" name="YearDelete">
-
+                            <select id="YearDelete" name="YearDelete">
+                                <option hidden selected> </option>
+                                <option>2020</option>
+                                <option>2021</option>
+                            </select>
                             <button class="delete" type="submit">Видалити дані</button>
                         </form>
                     </div>
