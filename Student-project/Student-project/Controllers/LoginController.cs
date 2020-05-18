@@ -18,14 +18,14 @@ namespace Student_project.Controllers
     {
         CDBContext db = new CDBContext();
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(AuthenticationModel user)
+        public async Task<IActionResult> LoginIntoSite(AuthenticationModel user)
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +50,7 @@ namespace Student_project.Controllers
 
                     return RedirectToAction("Index", "Teacher");
                 }
-                ModelState.AddModelError("", "Невірний логін чи пароль");
+                ModelState.AddModelError(string.Empty, "Невірний логін чи пароль");
             }
             return View("Index");
         }
