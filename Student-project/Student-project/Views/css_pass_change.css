@@ -1,0 +1,88 @@
+
+body{
+	background-color: #191919 	 ;
+	margin:0;
+	background-size: cover;
+}
+button{
+	background-image: none; 
+  	background: transparent;
+  	background-color: transparent;
+ 	color:#c3d2d7;
+  	border:0;
+    margin-left: 35%;
+  	width: 150px;
+}
+
+
+
+/*Body*/
+.inform{
+	padding-top:30px;
+	width: 1000px;
+	margin: auto;
+	margin-top: 5%;
+	height: 100%;
+}
+
+/*Input student*/
+
+.new_student{
+margin-left: auto; 
+width: 800px;
+height: 300px;
+border-radius: 10px;
+background:#c3d2d7;
+}
+
+p{
+	margin-top: -0.2px;
+	color: #191919;
+	padding-left: 80px;
+	font-size: 18px; 
+}
+
+input{
+	height: 19px;
+	width: 313px;
+	border:0;
+	border-radius: 5px;
+	margin-bottom: 18px;
+}
+select{
+	border:0;
+	width: 313px;
+	height: 21px;
+	border-radius: 5px;
+	margin-bottom: 18px;
+}
+h2{
+	color: #191919 ;
+	padding-left: 45px; 
+  	margin-left: 30%;
+}
+.text_inf{
+	width: 400px;
+	float: left;
+}
+
+td {
+    vertical-align: top; 
+    padding: 20px;
+    border-right: 80px dashed #c3d2d7;
+   }
+td#leftcol {
+    vertical-align: top; 
+    padding: 20px;
+    border-right: 80px dashed #c3d2d7;
+   }
+
+.delete, .input{
+	border:0;
+	height: 21px;
+	border-radius: 5px;
+	margin-left: 75%;
+	margin-top: -100%;
+	background-color: #3e383e;
+} 
+
