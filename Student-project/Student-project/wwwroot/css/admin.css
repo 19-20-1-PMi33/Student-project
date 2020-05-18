@@ -291,8 +291,9 @@ h2 {
 }
 
 .marks_inform {
-    margin: 30px auto;
-    width: 1000px;
+    margin-top:auto;
+    margin-left: 200px;
+    width: 900px;
     border-radius: 10px;
     background: #c3d2d7;
 }
@@ -305,5 +306,6 @@ table {
 
 td, th {
     padding: 10px;
+    text-align: center;
     border: 1px solid black;
 }

@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Mark";
+    Layout = "~/Views/Teacher/_Layout.cshtml";
+    Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
+}
+@section Title {
+    Оцінки
+}
+<div class="inform">
+
+    <div class="new_groupe">
+        <br>
+        <h2>Додати нову оцінку:</h2>
+        <div class="text_inf">
+            <p>Предмет:  </p>
+            <p>Рік:  </p>
+            <p>Група: </p>
+            <p>Студент:  </p>
+            <p>Оцінка:  </p>
+        </div>
+
+        <div class="text_inf">
+            <form asp-action="AddGroup" asp-controller="Admin" asp-antiforgery="true" method="post" id="add-group-form">
+                <div asp-validation-summary="All"></div>
+                <select id="FacultySelectAdd" name="FacultyAdd">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Faculties.OrderBy(x => ))
+                    {
+                        <option>@item.Title</option>
+                    }
+                </select>
+
+                <select id="DepartmentSelectAdd" name="DepartmentAdd">
+                </select>
+
+                <select id="fullNameSelectAdd" name="TeacherIdAdd">
+                </select>
+
+                <select class="input_subject" name="SubjectAdd">
+                    <option hidden selected> </option>
+                    @foreach (var item in db.Subjects.OrderBy(x => x.Title))
+                    {
+                        <option>@item.Title</option>
+                    }
+                </select>
+
+                <select id="GroupSelectAdd" name="GroupAdd">
+                </select>
+
+                <button class="input" type="submit">Внести дані</button>
+            </form>
+        </div>
+    </div>
+</div>
+

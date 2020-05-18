@@ -27,9 +27,13 @@ namespace Student_project.Controllers
             var courseforteachers = db.Exams.Where(x => x.Teacher == id)
                 .OrderByDescending(x => x.Year)
                 .ThenBy(x => x.Subject)
-                .ThenBy(x => x.Teacher)
+                .ThenBy(x => x.GroupName)
                 .ToList();
             return View(courseforteachers);
+        }
+        public IActionResult Mark()
+        {
+            return View();
         }
         public async Task<IActionResult> Exit()
         {
