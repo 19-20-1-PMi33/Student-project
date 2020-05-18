@@ -14,10 +14,11 @@
 <body>
     <div class="Menu">
         <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
-        <button >Викладач</button>
+        <button>Викладач</button>
         <button onclick="location.href='@Url.Action("Course","Teacher")'">Курси</button>
         <button onclick="location.href='@Url.Action("Mark","Teacher")'">Оцінки</button>
-        <button  onclick="location.href='@Url.Action("Exit", "Teacher")'">Вихід</button>
+        <button onclick="location.href='@Url.Action("PasswordChange","Teacher")'">Змінити пароль</button>
+        <button onclick="location.href='@Url.Action("Exit", "Teacher")'">Вихід</button>
     </div>
 </body>
 </html>

@@ -84,7 +84,7 @@ $("#FacultySelectDelete").change(function () {
     let faculty = document.getElementById("FacultySelectDelete").value;
     getDepartmentsByFacultyDelete(faculty);
     getGroupsByFacultyAdd1(faculty);
-    $("select[id=fullTeacherNameSelect]").html("");
+    $("select[id=fullNameSelect]").html("");
 });
 
 $("#DepartmentSelectDelete").change(function () {
@@ -111,7 +111,7 @@ var getTeacherByDepartmentDelete = function (department) {
         url: "/Admin/GetTeachersByDepartment",
         data: 'department=' + department,
         success: function (data) {
-            $("select[id=fullTeacherNameSelect]").html(data);
+            $("select[id=fullNameSelect]").html(data);
         },
         error: function (data) {
             console.log(data);
@@ -141,6 +141,7 @@ $("#FacultySelectAdd").change(function () {
 $("#DepartmentSelectAdd").change(function () {
     let department = document.getElementById("DepartmentSelectAdd").value;
     getTeacherByDepartmentDelete1(department);
+    $("select[id=fullNameSelectAdd]").html("");
 });
 
 var getDepartmentsByFacultyDelete1 = function (faculty) {
