@@ -66,7 +66,7 @@ button {
 .new_student {
     margin-left: auto;
     width: 800px;
-    height: 400px;
+    height: auto;
     border-radius: 10px;
     background: #c3d2d7;
 }
@@ -163,6 +163,15 @@ td {
     flex: 50%;
     padding: 10px;
     height: 300px;
+    width: 180px;
+    margin-right: 100px;
+}
+
+.column1 {
+    flex: 50%;
+    padding: 10px;
+    height: 300px;
+    width: 100%;
 }
 /*Input teacher*/
 

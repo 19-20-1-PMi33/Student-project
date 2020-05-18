@@ -11,20 +11,20 @@
 
     <div class="inform">
 
-        
+
         <div class="new_student">
             <br>
             <h2>Внести студента</h2>
             <div class="text_inf">
-
                 <div class="row">
                     <div class="column">
+                        <p></p>
                         <p>ПІБ&nbsp;Студента:</p>
                         <p>Номер&nbsp;залікової&nbsp;книги:</p>
                         <p>Факультет:</p>
                         <p>Група:</p>
                     </div>
-                    <div class="column">
+                    <div class="column1">
                         <form asp-action="AddStudent" asp-controller="Admin" asp-antiforgery="true" method="post" id="add-student-form">
                             <div asp-validation-summary="All" class="mrgn-18 form-error"></div>
                             <input class="input_sur" type="text" name="FullNameAdd">
@@ -47,36 +47,40 @@
 
                 </div>
             </div>
-            </div>
+        </div>
+        <div class="delete_student">
+            <br>
+            <h2>Видалити студента</h2>
+            <div class="text_inf">
+                <div class="row">
+                    <div class="column">
+                        <p></p>
+                        <p>Факультет:</p>
+                        <p>Группа:</p>
+                        <p>ПІБ&nbsp;Студента:</p>
+                    </div>
+                    <div class="column1">
+                        <form asp-action="DeleteStudent" asp-controller="Admin" asp-antiforgery="true" method="post" id="delete-student-form">
+                            <div asp-validation-summary="All"></div>
+                            <select id="FacultySelect" name="FacultyDelete">
+                                <option hidden selected> </option>
+                                @*<option>---</option>*@
+                                @foreach (var item in db.Faculties.OrderBy(x => x.Title).Select(x => x.Title))
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </select>
 
-            <div class="delete_student">
-                <br>
-                <h2>Видалити студента</h2>
-                <div class="text_inf">
-                    <p>Факультет:  </p>
-                    <p>Группа:  </p>
-                    <p>ПІБ Студента:  </p>
-                </div>
+                            <select id="GroupSelect" name="GroupDelete">
+                            </select>
 
-                <div class="text_inf">
-                    <form asp-action="DeleteStudent" asp-controller="Admin" asp-antiforgery="true" method="post" id="delete-student-form">
-                        <div asp-validation-summary="All"></div>
-                        <select id="FacultySelect" name="FacultyDelete">
-                            <option hidden selected> </option>
-                            @*<option>---</option>*@
-                            @foreach (var item in db.Faculties.OrderBy(x => x.Title).Select(x => x.Title))
-                            {
-                                <option value="@item">@item</option>
-                            }
-                        </select>
+                            <select id="fullNameSelect" name="StudentIdDelete">
+                            </select>
+                            <button class="delete" type="submit">Видалити дані</button>
+                        </form>
+                    </div>
 
-                        <select id="GroupSelect" name="GroupDelete">
-                        </select>
-
-                        <select id="fullNameSelect" name="StudentIdDelete">
-                        </select>
-                        <button class="delete" type="submit">Видалити дані</button>
-                    </form>
                 </div>
             </div>
         </div>
+    </div>

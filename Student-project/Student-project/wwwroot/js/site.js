@@ -327,3 +327,17 @@ $("#add-mark-form").submit(function (e) {
         }
     });
 });
+$("#change-password-form").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/Teacher/ChangePass",
+        data: $("#change-password-form").serialize(),
+        success: function () {
+            toastr.success('Пароль успішно змінений.', 'Успіх', { timeOut: 3000 });
+        },
+        error: function () {
+            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+        }
+    });
+});

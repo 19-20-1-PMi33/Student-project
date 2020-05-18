@@ -38,11 +38,46 @@ namespace Student_project.Controllers
                 .ToList();
             return View(courseforteachers);
         }
+        public IActionResult PasswordChange()
+        {
+            return View();
+        }
         public IActionResult Mark()
         {
             var id = Convert.ToInt32(User.Identity.Name);
             ViewData["TeacherID"] = id;
             return View();
+        }
+        public async Task<IActionResult> ChangePass()
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var oldPass = Request.Form["oldpass"].ToString();
+                    var newPass = Request.Form["newpass"].ToString();
+                    var repOldPass = Request.Form["rep_newpass"].ToString();
+                    var teacherId = Convert.ToInt32(User.Identity.Name);
+
+                    var teacher = await db.Teachers.FindAsync(teacherId);
+
+                    if(teacher.Password == oldPass && newPass == repOldPass)
+                    {
+                        teacher.Password = newPass;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        return UnprocessableEntity();
+                    }
+
+                }
+                catch (ArgumentException ex)
+                {
+                    _logger.LogError(ex.Message);
+                }
+            }
+            return NoContent();
         }
         [HttpGet]
         public async Task<IActionResult> GetGroupsBySubjectTeacher(string subject)
