@@ -11,7 +11,7 @@
     <div class="Menu">
         <div class="gerb"><img src="~/img/gerb.png" width="70" height="80"></div>
         <button class="Admin">Викладач</button>
-        <button class="Teacher">Курси</button>
+        <button class="Teacher" onclick="location.href='@Url.Action("Course","Teacher")'">Курси</button>
         <button class="Exit" onclick="location.href='@Url.Action("Exit", "Teacher")'">Вихід</button>
     </div>
     @RenderBody()

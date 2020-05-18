@@ -46,7 +46,7 @@ namespace Student_project.Controllers
                 Teachers teacher = await db.Teachers.FirstOrDefaultAsync(u => u.Email == user.Login && u.Password == user.Password);
                 if (teacher != null)
                 {
-                    await Authenticate(user.Login, "Teacher");
+                    await Authenticate(teacher.ID.ToString(), "Teacher");
 
                     return RedirectToAction("Index", "Teacher");
                 }
