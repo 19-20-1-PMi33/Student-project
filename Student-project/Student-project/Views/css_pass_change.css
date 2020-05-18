@@ -11,6 +11,7 @@ button{
  	color:#c3d2d7;
   	border:0;
     margin-left: 35%;
+    margin-top: 30px;
   	width: 150px;
 }
 
@@ -19,7 +20,7 @@ button{
 /*Body*/
 .inform{
 	padding-top:30px;
-	width: 1000px;
+	width: 800px;
 	margin: auto;
 	margin-top: 5%;
 	height: 100%;
@@ -29,8 +30,8 @@ button{
 
 .new_student{
 margin-left: auto; 
-width: 800px;
-height: 300px;
+width: 700px;
+height: 270px;
 border-radius: 10px;
 background:#c3d2d7;
 }
@@ -86,3 +87,12 @@ td#leftcol {
 	background-color: #3e383e;
 } 
 
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    padding: 10px;
+    height: 300px; 
+}
