@@ -208,7 +208,7 @@ $("#delete-student-form").submit(function (e) {
         url: "/Admin/DeleteStudent",
         data: $("#delete-student-form").serialize(),
         success: function () {
-            toastr.success('Студент видалиний успішно.', 'Успіх', { timeOut: 3000 });
+            toastr.success('Студент видалений успішно.', 'Успіх', { timeOut: 3000 });
         },
         error: function () {
             toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
@@ -240,7 +240,7 @@ $("#delete-teacher-form").submit(function (e) {
         url: "/Admin/DeleteTeacher",
         data: $("#delete-teacher-form").serialize(),
         success: function () {
-            toastr.success('Викладач видалиний успішно.', 'Успіх', { timeOut: 3000 });
+            toastr.success('Викладач видалений успішно.', 'Успіх', { timeOut: 3000 });
         },
         error: function () {
             toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
@@ -272,7 +272,7 @@ $("#delete-group-form").submit(function (e) {
         url: "/Admin/DeleteGroup",
         data: $("#delete-group-form").serialize(),
         success: function () {
-            toastr.success('Академічна група видалина успішно.', 'Успіх', { timeOut: 3000 });
+            toastr.success('Академічна група видалена успішно.', 'Успіх', { timeOut: 3000 });
         },
         error: function () {
             toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
@@ -337,20 +337,6 @@ $("#change-password-form").submit(function (e) {
         type: "POST",
         url: "/Teacher/ChangePass",
         data: $("#change-password-form").serialize(),
-        success: function () {
-            toastr.success('Пароль успішно змінений.', 'Успіх', { timeOut: 3000 });
-        },
-        error: function () {
-            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
-        }
-    });
-});
-$("#change-password-form-student").submit(function (e) {
-    e.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: "/Home/ChangePass",
-        data: $("#change-password-form-students").serialize(),
         success: function () {
             toastr.success('Пароль успішно змінений.', 'Успіх', { timeOut: 3000 });
         },
