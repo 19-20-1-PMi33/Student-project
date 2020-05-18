@@ -84,7 +84,7 @@ $("#FacultySelectDelete").change(function () {
     let faculty = document.getElementById("FacultySelectDelete").value;
     getDepartmentsByFacultyDelete(faculty);
     getGroupsByFacultyAdd1(faculty);
-    $("select[id=fullNameSelect]").html("");
+    $("select[id=fullTeacherNameSelect]").html("");
 });
 
 $("#DepartmentSelectDelete").change(function () {
@@ -111,7 +111,7 @@ var getTeacherByDepartmentDelete = function (department) {
         url: "/Admin/GetTeachersByDepartment",
         data: 'department=' + department,
         success: function (data) {
-            $("select[id=fullNameSelect]").html(data);
+            $("select[id=fullTeacherNameSelect]").html(data);
         },
         error: function (data) {
             console.log(data);
@@ -268,6 +268,58 @@ $("#delete-group-form").submit(function (e) {
         data: $("#delete-group-form").serialize(),
         success: function () {
             toastr.success('Академічна група видалина успішно.', 'Успіх', { timeOut: 3000 });
+        },
+        error: function () {
+            toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
+        }
+    });
+});
+
+$("#TeacherSubject").change(function () {
+    let subject = document.getElementById("TeacherSubject").value;
+    getGroupsBySubjectTeacher(subject);
+    $("select[id=fullNameSelectTeacher]").html("");
+});
+
+$("#GroupSelectTeacher").change(function () {
+    let group = document.getElementById("GroupSelectTeacher").value;
+    getStudentsByGroupTeacher(group);
+});
+
+var getGroupsBySubjectTeacher = function (subject) {
+    $.ajax({
+        type: "GET",
+        url: "/Teacher/GetGroupsBySubjectTeacher",
+        data: 'subject=' + subject,
+        success: function (data) {
+            $("select[id=GroupSelectTeacher]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+var getStudentsByGroupTeacher = function (group) {
+    $.ajax({
+        type: "GET",
+        url: "/Teacher/GetStudentsByGroupTeacher",
+        data: 'group=' + group,
+        success: function (data) {
+            $("select[id=fullNameSelectTeacher]").html(data);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+};
+$("#add-mark-form").submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/Teacher/AddMark",
+        data: $("#add-mark-form").serialize(),
+        success: function () {
+            toastr.success('Оцінка додана успішно.', 'Успіх', { timeOut: 3000 });
         },
         error: function () {
             toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });

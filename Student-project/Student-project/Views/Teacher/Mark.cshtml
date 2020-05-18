@@ -3,6 +3,7 @@
     ViewData["Title"] = "Mark";
     Layout = "~/Views/Teacher/_Layout.cshtml";
     Student_project.Repository.CDBContext db = new Student_project.Repository.CDBContext();
+    var teacherID = Convert.ToInt32(User.Identity.Name);
 }
 @section Title {
     Оцінки
@@ -21,32 +22,31 @@
         </div>
 
         <div class="text_inf">
-            <form asp-action="AddGroup" asp-controller="Admin" asp-antiforgery="true" method="post" id="add-group-form">
+            <form asp-action="AddMark" asp-controller="Teacher" asp-antiforgery="true" method="post" id="add-mark-form">
                 <div asp-validation-summary="All"></div>
-                <select id="FacultySelectAdd" name="FacultyAdd">
-                    <option hidden selected> </option>
-                    @foreach (var item in db.Faculties.OrderBy(x => ))
+                <select id="TeacherSubject" name="TeacherSubject">
+                    <option hidden selected> </option>          
+                    @foreach (var item in db.Exams.Where(x=>x.Teacher== teacherID).OrderBy(x => x.Subject).Select(x => x.Subject).Distinct())
                     {
-                        <option>@item.Title</option>
+                        <option>@item</option>
                     }
                 </select>
 
-                <select id="DepartmentSelectAdd" name="DepartmentAdd">
-                </select>
-
-                <select id="fullNameSelectAdd" name="TeacherIdAdd">
-                </select>
-
-                <select class="input_subject" name="SubjectAdd">
+                <select id="TeacherYear" name="TeacherYear">
                     <option hidden selected> </option>
-                    @foreach (var item in db.Subjects.OrderBy(x => x.Title))
+                    @foreach (var item in db.Exams.Where(x => x.Teacher == teacherID).OrderBy(x => x.Year).Select(x => x.Year).Distinct())
                     {
-                        <option>@item.Title</option>
+                        <option>@item</option>
                     }
                 </select>
 
-                <select id="GroupSelectAdd" name="GroupAdd">
+                <select id="GroupSelectTeacher" name="GroupSelectTeacher">
                 </select>
+
+                <select id="fullNameSelectTeacher" name="fullNameSelectTeacher">
+                </select>
+
+                <input type="text" name="Mark">
 
                 <button class="input" type="submit">Внести дані</button>
             </form>

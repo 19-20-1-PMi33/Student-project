@@ -1,0 +1,9 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<Student_project.Model.Students>;
+
+@foreach (var item in Model.OrderBy(x => x.LastName).ThenBy(x => x.FirstName))
+{
+    <option value="@item.ID">@item.LastName @item.FirstName @item.MiddleName</option>
+}

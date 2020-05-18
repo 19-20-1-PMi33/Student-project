@@ -1,0 +1,9 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<Student_project.Model.Exams>
+
+@foreach (var item in Model.OrderBy(x=>x.GroupName).Select(x=>x.GroupName).Distinct())
+{
+    <option value="@item">@item</option>
+}

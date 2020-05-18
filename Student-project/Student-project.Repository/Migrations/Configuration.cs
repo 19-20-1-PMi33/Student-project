@@ -202,14 +202,12 @@
                 new Marks
                 {
                     StudentId = "123456c",
-                    Date = new DateTime(2019,12,26).Date,
                     Exam = 1,
                     Mark = 68
                 },
                 new Marks
                 {
                     StudentId = "123456c",
-                    Date = new DateTime(2019,12,29).Date,
                     Exam = 2,
                     Mark = 90
                 }
