@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Student_project.Model;
 using Student_project.Repository;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Student_project.Controllers
 {
@@ -61,7 +60,7 @@ namespace Student_project.Controllers
 
                     var teacher = await db.Teachers.FindAsync(teacherId);
 
-                    if(teacher.Password == oldPass && newPass == repOldPass)
+                    if (teacher.Password == oldPass && newPass == repOldPass)
                     {
                         teacher.Password = newPass;
                         db.SaveChanges();
@@ -96,7 +95,7 @@ namespace Student_project.Controllers
             {
                 _logger.LogError(ex.Message);
 
-                return PartialView("GroupPartial", db.Exams.Select(x=>x.GroupName).Distinct().ToList());
+                return PartialView("GroupPartial", db.Exams.Select(x => x.GroupName).Distinct().ToList());
             }
         }
         [HttpGet]
@@ -122,7 +121,7 @@ namespace Student_project.Controllers
             {
                 try
                 {
-                    
+
                     var mark = Convert.ToInt32(Request.Form["Mark"]);
                     if (mark > 100 || mark < 0)
                     {

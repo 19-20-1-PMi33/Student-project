@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Data.Entity;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Student_project.Models;
 using Student_project.Repository;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Student_project.Model;
+using System.Data.Entity;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Student_project.Controllers
 {
@@ -32,7 +29,7 @@ namespace Student_project.Controllers
             string user = User.Identity.Name;
             var student = db.Students.Where(x => x.ID == user)
                 .Include(x => x.Groups)
-                .Include(x=>x.Groups.Departments)
+                .Include(x => x.Groups.Departments)
                 .First();
 
             return View(student);
@@ -43,10 +40,10 @@ namespace Student_project.Controllers
             var student = await db.Students.FindAsync(user);
             double groupMark = db.Marks.Where(x => x.Students.Group == student.Group).Sum(x => x.Mark) / db.Marks.Count(x => x.Students.Group == student.Group);
             ViewBag.GroupMark = groupMark;
-            var marks = db.Marks.Where(x=>x.StudentId == user)
-                .Include(x=>x.Exams.Subjects)
-                .Include(x=>x.Exams.Teachers)
-                .Include(x=>x.Students)
+            var marks = db.Marks.Where(x => x.StudentId == user)
+                .Include(x => x.Exams.Subjects)
+                .Include(x => x.Exams.Teachers)
+                .Include(x => x.Students)
                 .ToList();
 
             return View(marks);
