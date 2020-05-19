@@ -175,15 +175,17 @@
             {
                 new Exams
                 {
+                    Key = 1,
                     Subject = "ТІМС",
-                    Teacher = 15,
+                    Teacher = 1,
                     GroupName = "ПМІ-33",
                     Year = 2020
                 },
                 new Exams
                 {
+                    Key = 2,
                     Subject = "Комп'ютерні інформаційні мережі",
-                    Teacher = 16,
+                    Teacher = 2,
                     GroupName = "ПМІ-33",
                     Year = 2020
                 }
@@ -201,12 +203,14 @@
             {
                 new Marks
                 {
+                    ID = 1,
                     StudentId = "123456c",
                     Exam = 1,
                     Mark = 68
                 },
                 new Marks
                 {
+                    ID = 2,
                     StudentId = "123456c",
                     Exam = 2,
                     Mark = 90
