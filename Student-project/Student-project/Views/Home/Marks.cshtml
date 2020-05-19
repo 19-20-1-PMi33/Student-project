@@ -1,4 +1,5 @@
 ﻿@model List<Student_project.Model.Marks>
+
 @{
     Layout = "~/Views/Home/_Layout.cshtml";
 }
@@ -12,10 +13,6 @@
     double countCMark = (Model.Count(x => x.Mark >= 71 && x.Mark < 81) * 100) / count;
     double countDMark = (Model.Count(x => x.Mark >= 61 && x.Mark < 71) * 100) / count;
     double countEMark = (Model.Count(x => x.Mark >= 51 && x.Mark < 61) * 100) / count;
-}
-
-@{
-    Layout = "~/Views/Home/_Layout.cshtml";
 }
 
 @section Name {

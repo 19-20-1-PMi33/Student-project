@@ -126,7 +126,7 @@ namespace Student_project.Controllers
                     var mark = Convert.ToInt32(Request.Form["Mark"]);
                     if (mark > 100 || mark < 0)
                     {
-                        return UnprocessableEntity();
+                        return ValidationProblem();
                     }
                     else
                     {
