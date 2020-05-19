@@ -4,6 +4,7 @@
 
 @model List<Student_project.Model.Teachers>;
 
+<option hidden selected> </option>
 @foreach (var item in Model.OrderBy(x => x.LastName).ThenBy(x => x.FirstName))
 {
     <option value="@item.ID">@item.LastName @item.FirstName @item.MiddleName</option>

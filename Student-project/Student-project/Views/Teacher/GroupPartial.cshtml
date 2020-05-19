@@ -3,6 +3,7 @@
 *@
 @model List<Student_project.Model.Exams>
 
+<option hidden selected> </option>
 @foreach (var item in Model.OrderBy(x=>x.GroupName).Select(x=>x.GroupName).Distinct())
 {
     <option value="@item">@item</option>
