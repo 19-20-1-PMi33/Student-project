@@ -35,7 +35,7 @@
             <div class="Password">
                 <h4>Пароль:</h4>
                 <input class="input_pas" type="password" asp-for="Password" size="40"><br />
-                @Html.ValidationMessageFor(m => m.Login, "", new { @style = "color:red" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @style = "color:red" })
                 @*<br><span class="field-validation-valid" asp-validation-for="Password"></span><br>*@
             </div>
 

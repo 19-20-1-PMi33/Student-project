@@ -324,7 +324,7 @@ $("#add-mark-form").submit(function (e) {
         url: "/Teacher/AddMark",
         data: $("#add-mark-form").serialize(),
         success: function () {
-            toastr.success('Оцінка додана успішно або оновлена.', 'Успіх', { timeOut: 3000 });
+            toastr.success('Оцінка додана або оновлена успішно.', 'Успіх', { timeOut: 3000 });
         },
         error: function () {
             toastr.error('Перевірте правильність заповнення полів.', 'Помилка', { timeOut: 3000 });
