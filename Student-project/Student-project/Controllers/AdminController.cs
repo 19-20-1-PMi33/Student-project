@@ -125,11 +125,11 @@ namespace Student_project.Controllers
             {
                 try
                 {
+                    var student = db.Students.Where(x => x.ID == studentId).First();
                     foreach (var item in db.Marks.Where(x => x.Students.ID == studentId))
                     {
                         db.Marks.Remove(item);
                     }
-                    var student = db.Students.Find(studentId);
                     db.Students.Remove(student);
                     db.SaveChanges();
                 }
@@ -228,6 +228,7 @@ namespace Student_project.Controllers
                 {
                     var tcr = Request.Form["TeacherIdDelete"].ToString();
                     var teachersId = Convert.ToInt32(tcr);
+                    var teacher = db.Teachers.Where(x => x.ID == teachersId).First();
                     foreach (var item in db.Marks.Where(x => x.Exams.Teacher == teachersId))
                     {
                         db.Marks.Remove(item);
@@ -236,7 +237,6 @@ namespace Student_project.Controllers
                     {
                         db.Exams.Remove(item);
                     }
-                    var teacher = db.Teachers.Find(teachersId);
                     db.Teachers.Remove(teacher);
                     db.SaveChanges();
                 }

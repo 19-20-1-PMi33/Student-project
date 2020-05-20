@@ -19,22 +19,6 @@ button {
 /*Menu*/
 
 
-body {
-    background-color: #191919;
-    margin: 0;
-    background-size: cover;
-}
-
-button {
-    background-image: none;
-    background: transparent;
-    background-color: transparent;
-    color: #c3d2d7;
-    border: 0;
-    margin-top: 30px;
-    width: 150px;
-}
-
 /*Menu*/
 
 .Menu {
@@ -299,34 +283,19 @@ h2 {
     border-radius: 10px;
     background: #c3d2d7;
 }
-
 table {
-    width: 800px;
+    border-spacing: 0;
+    width: 825px;
     margin-left: 35px;
-    border-collapse: collapse;
+    border: 1px solid #808080;
 }
 
-td, th {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid black;
+th, td {
+    text-align: left;
+    padding: 12px;
 }
 
-body {
-    background-color: #191919;
-    margin: 0;
-    background-size: cover;
-}
 
-button {
-    background-image: none;
-    background: transparent;
-    background-color: transparent;
-    color: #c3d2d7;
-    border: 0;
-    margin-top: 30px;
-    width: 150px;
-}
 .row {
     display: flex;
 }

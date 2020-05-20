@@ -155,16 +155,12 @@ p {
 }
 table {
     border-spacing: 0;
-    width: 80%;
-    margin-left:35px;
-    border: 1px solid #ddd;
+    width: 925px;
+    margin-left: 35px;
+    border: 1px solid #808080;
 }
 
 th, td {
     text-align: left;
     padding: 12px;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2
 }
