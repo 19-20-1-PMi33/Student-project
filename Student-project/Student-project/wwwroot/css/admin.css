@@ -19,8 +19,6 @@ button {
 /*Menu*/
 
 
-/*Menu*/
-
 .Menu {
     float: left;
     height: 100%;
@@ -284,15 +282,15 @@ h2 {
     background: #c3d2d7;
 }
 table {
-    border-spacing: 0;
     width: 825px;
     margin-left: 35px;
-    border: 1px solid #808080;
+    border: 1px solid black;
 }
 
 th, td {
     text-align: left;
     padding: 12px;
+    border: 1px solid black;
 }
 
 
